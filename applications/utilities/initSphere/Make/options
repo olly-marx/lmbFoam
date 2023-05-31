@@ -1,0 +1,11 @@
+EXE_INC = \
+    -I$(LIB_SRC)/finiteVolume/lnInclude \
+    -I$(LIB_SRC)/finiteArea/lnInclude \
+    -I$(LIB_SRC)/immersedBoundary/immersedBoundary/lnInclude \
+    -I../../../../src/navalHydro/lnInclude
+
+EXE_LIBS = \
+    -lfiniteVolume \
+    -lfiniteArea \
+    -limmersedBoundary \
+    -L$(FOAM_USER_LIBBIN) -lnavalHydro

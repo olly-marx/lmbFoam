@@ -1,0 +1,83 @@
+# 0 "files"
+# 0 "<built-in>"
+# 0 "<command-line>"
+
+
+
+
+# 1 "/usr/include/stdc-predef.h" 1 3 4
+
+# 17 "/usr/include/stdc-predef.h" 3 4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 45 "/usr/include/stdc-predef.h" 3 4
+
+# 55 "/usr/include/stdc-predef.h" 3 4
+
+
+
+
+
+
+
+
+
+# 4 "<command-line>" 2
+# 1 "files"
+finiteVolume/interfaceFv/interfaceFvData/interfaceFvData/curvatureModels/curvatureModel/curvatureModel.C
+finiteVolume/interfaceFv/interfaceFvData/interfaceFvData/curvatureModels/interpolationSmoothedAlpha/interpolationSmoothedAlpha.C
+finiteVolume/interfaceFv/interfaceFvData/interfaceFvData/curvatureModels/interpolationSmoothedLevelSet/interpolationSmoothedLevelSet.C
+finiteVolume/interfaceFv/interfaceFvData/interfaceFvData/curvatureModels/interpolationSmoothedFaceAlpha/interpolationSmoothedFaceAlpha.C
+finiteVolume/interfaceFv/interfaceFvData/interfaceFvData/curvatureModels/interpolationSmoothedCSFAlpha/interpolationSmoothedCSFAlpha.C
+
+finiteVolume/interfaceFv/interfaceFvData/interfaceFvData/interfaceFvData.C
+finiteVolume/interfaceFv/interfaceFvData/interfaceFvDataVOF/interfaceFvDataVOF.C
+
+finiteVolume/interfaceFv/interfaceFvData/interfaceFacesWave/interfaceFacesWave.C
+
+finiteVolume/interfaceFv/interfaceGradSchemes/interfaceGradScheme/interfaceGradScheme.C
+finiteVolume/interfaceFv/interfaceGradSchemes/interfaceGaussGrad/interfaceGaussGrad.C
+finiteVolume/interfaceFv/interfaceGradSchemes/interfaceLeastSquaresGrad/interfaceLeastSquaresGrad.C
+finiteVolume/interfaceFv/interfaceGradSchemes/interfaceLimitedGradSchemes/interfaceCellLimitedGrad/interfaceCellLimitedGrads.C
+finiteVolume/interfaceFv/interfaceGradSchemes/interfaceLimitedGradSchemes/interfaceFaceLimitedGrad/interfaceFaceLimitedGrads.C
+
+finiteVolume/interfaceFv/interfaceLaplacianSchemes/interfaceGaussLaplacian/interfaceGaussLaplacian.C
+
+finiteVolume/interfaceFv/interfaceSnGradSchemes/interfaceSnGradScheme/interfaceSnGradScheme.C
+finiteVolume/interfaceFv/interfaceSnGradSchemes/interfaceUncorrectedSnGrad/interfaceUncorrectedSnGrad.C
+finiteVolume/interfaceFv/interfaceSnGradSchemes/interfaceCorrectedSnGrad/interfaceCorrectedSnGrad.C
+finiteVolume/interfaceFv/interfaceSnGradSchemes/interfaceLimitedSnGrad/interfaceLimitedSnGrad.C
+
+finiteVolume/advectionSchemes/isoAdvector/isoAdvection/isoAdvection.C
+finiteVolume/advectionSchemes/isoAdvector/isoCutCell/isoCutCell.C
+finiteVolume/advectionSchemes/isoAdvector/isoCutFace/isoCutFace.C
+
+general/numericsFunctions/numericsFunctions.C
+
+functionObjects/magGradField/magGradFieldFunctionObject.C
+functionObjects/dropletStatistics/dropletStatistics.C
+functionObjects/dropletStatistics/dropletStatisticsFunctionObject.C
+
+refinementSelection/interfaceProximityRefinement/interfaceProximityRefinement.C
+refinementSelection/interfaceCellsRefinement/interfaceCellsRefinement.C
+
+dynamicMesh/dynamicLoadBalancedRefinementFvMesh/dynamicLoadBalancedRefinementFvMesh.C
+
+LIB = $(FOAM_USER_LIBBIN)/libatomization

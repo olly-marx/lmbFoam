@@ -1,0 +1,11 @@
+#!/bin/sh
+
+( cd 2DTests ; ./Allrun )
+
+( cd staticDroplet ; ./Allrun )
+( cd staticDroplet-navalFoam ; ./Allrun )
+
+( cd dropletInChannel ; ./Allrun )
+( cd dropletInChannel-navalFoam ; ./Allrun )
+
+# ( cd SprayD-case209133-BackPressure2MPa ; ./Allrun )
