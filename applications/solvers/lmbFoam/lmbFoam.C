@@ -117,14 +117,20 @@ int main(int argc, char *argv[])
 #           include "alphaEqn.H"
 
 	    // Check the alpha field value in each cell on lithiumInterface
-	    // if it is less than 1, write data and close the program
-	    // if it is greater than 1, continue the simulation
+	    // if it is greater than 0, write data and close the program
+	    // else, continue the simulation
+	    //
+
+	    volScalarField divPhi = fvc::div(phi);
 
 	    label patchi = mesh.boundaryMesh().findPatchID("lithiumInterface");
 
-	    volScalarField alpha = alpha1.boundaryField()[patchi];
+	    scalarField alphaLithiumInterface = alpha1.boundaryField()[patchi];
 
-	    if(gMin(alpha.internalField()) < 1)
+	    scalar alphaMax = gMax(alphaLithiumInterface);
+	    Info<< "alphaMax = " << alphaMax << endl;
+
+	    if(alphaMax > 0.4)
 	    {
 		Info<< "FATAL CONDITION: SHORT CIRCUIT DETECTED" << endl;
 
@@ -132,12 +138,21 @@ int main(int argc, char *argv[])
 		    << "  ClockTime = " << runTime.elapsedClockTime() << " s"
 		    << nl << "End\n" << endl;
 		// Write data and then exit
-		runTime.writeAndEnd();
+		Info<< "Writing data at time " << runTime.timeName() << endl;
+		alpha1.write();
+		exit(0);
+	    }
+	    else if(alphaMax > 1.0e-10)
+	    {
+		Info<< "Nearing Short Circuit Condition" << nl 
+			<< "Writing data at time " << runTime.timeName() << endl;
+			alpha1.write();
 	    }
 
             turbulence->correct();
         }
 
+	Info<< "Writing data at time " << runTime.timeName() << endl;
         runTime.write();
 
         Info<< "ExecutionTime = " << runTime.elapsedCpuTime() << " s"

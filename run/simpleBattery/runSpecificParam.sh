@@ -60,16 +60,16 @@ echo "Running with $Param = $Setting and Voltage = $Voltage, (Defaults) Bext = $
 # Set up blockMesh for this run
 source /usr/lib/openfoam/openfoam2212/etc/bashrc
 blockMesh
-source /home/ojm40/foam/foam-extend-5.0/etc/bashrc
 
 # Set up the initial conditions
 runApplication setFields
 
 # contruct parallel mesh
 runApplication decomposePar
+source /home/ojm40/foam/foam-extend-5.0/etc/bashrc
 
 # Run the program in parallel
-mpirun -np 8 myLmbFoam -parallel
+mpirun -np 8 lmbFoam -parallel
 
 # Reconstruct the parallel data
 runApplication reconstructPar
@@ -86,7 +86,8 @@ dir="$Param$Voltage$Setting"
 echo "Moving files to $dir"
 
 # Store the run data using the storeRun.sh script
-bash storeRun.sh $dir
+#bash storeRun.sh $dir
+
 
 # now clear the case for the next run
 pyFoamClearCase.py .

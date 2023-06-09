@@ -25,7 +25,7 @@ do
 		runApplication decomposePar
 
 		# Run the program in parallel
-		runApplication mpirun -np 8 myLmbFoam -parallel
+		runApplication mpirun -np 8 lmbFoam -parallel
 
 		# Reconstruct the parallel data
 		runApplication reconstructPar
@@ -74,7 +74,7 @@ do
 	#	runApplication decomposePar
 
 	#	# Run the program in parallel
-	#	runApplication mpirun -np 8 myLmbFoam -parallel
+	#	runApplication mpirun -np 8 lmbFoam -parallel
 
 	#	# Reconstruct the parallel data
 	#	runApplication reconstructPar

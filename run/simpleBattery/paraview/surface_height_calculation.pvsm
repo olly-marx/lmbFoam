@@ -15795,7 +15795,7 @@
         <Domain name="bool" id="55867.DecomposePolyhedra.bool"/>
       </Property>
       <Property name="FileName" id="55867.FileName" number_of_elements="1">
-        <Element index="0" value="/home/ojm40/foam/ojm40-5.0/work/AtomizationFoam/run/liquidMetalBatteries/lmbFoam/simpleBattery_copy/simpleBattery_copy.foam"/>
+        <Element index="0" value="/home/ojm40/foam/ojm40-5.0/work/AtomizationFoam/run/liquidMetalBatteries/lmbFoam/simpleBattery/simpleBattery.foam"/>
         <Domain name="files" id="55867.FileName.files"/>
       </Property>
       <Property name="LagrangianArrayInfo" id="55867.LagrangianArrayInfo"/>
@@ -17755,19 +17755,19 @@
       <Item id="57936" name="RepresentationAnimationHelper"/>
     </ProxyCollection>
     <ProxyCollection name="pq_helper_proxies.56079">
-      <Item id="55856" name="DataAxesGrid" logname="simpleBattery_copy.foam(UnstructuredGridRepresentation)/DataAxesGrid/GridAxesRepresentation"/>
-      <Item id="55915" name="GlyphType" logname="simpleBattery_copy.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/ArrowSource"/>
-      <Item id="55926" name="GlyphType" logname="simpleBattery_copy.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/ConeSource"/>
-      <Item id="55937" name="GlyphType" logname="simpleBattery_copy.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/CubeSource"/>
-      <Item id="55948" name="GlyphType" logname="simpleBattery_copy.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/CylinderSource"/>
-      <Item id="55959" name="GlyphType" logname="simpleBattery_copy.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/LineSource"/>
-      <Item id="55970" name="GlyphType" logname="simpleBattery_copy.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/SphereSource"/>
-      <Item id="55981" name="GlyphType" logname="simpleBattery_copy.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/GlyphSource2D"/>
-      <Item id="55992" name="GlyphType" logname="simpleBattery_copy.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/PipelineConnection"/>
-      <Item id="56005" name="OSPRayScaleFunction" logname="simpleBattery_copy.foam(UnstructuredGridRepresentation)/SurfaceRepresentation/OSPRayScaleFunction/PiecewiseFunction"/>
-      <Item id="56006" name="OpacityTransferFunction" logname="simpleBattery_copy.foam(UnstructuredGridRepresentation)/PointGaussianRepresentation/OpacityTransferFunction/PiecewiseFunction"/>
-      <Item id="55904" name="PolarAxes" logname="simpleBattery_copy.foam(UnstructuredGridRepresentation)/PolarAxes/PolarAxesRepresentation"/>
-      <Item id="56007" name="ScaleTransferFunction" logname="simpleBattery_copy.foam(UnstructuredGridRepresentation)/PointGaussianRepresentation/ScaleTransferFunction/PiecewiseFunction"/>
+      <Item id="55856" name="DataAxesGrid" logname="simpleBattery.foam(UnstructuredGridRepresentation)/DataAxesGrid/GridAxesRepresentation"/>
+      <Item id="55915" name="GlyphType" logname="simpleBattery.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/ArrowSource"/>
+      <Item id="55926" name="GlyphType" logname="simpleBattery.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/ConeSource"/>
+      <Item id="55937" name="GlyphType" logname="simpleBattery.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/CubeSource"/>
+      <Item id="55948" name="GlyphType" logname="simpleBattery.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/CylinderSource"/>
+      <Item id="55959" name="GlyphType" logname="simpleBattery.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/LineSource"/>
+      <Item id="55970" name="GlyphType" logname="simpleBattery.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/SphereSource"/>
+      <Item id="55981" name="GlyphType" logname="simpleBattery.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/GlyphSource2D"/>
+      <Item id="55992" name="GlyphType" logname="simpleBattery.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/PipelineConnection"/>
+      <Item id="56005" name="OSPRayScaleFunction" logname="simpleBattery.foam(UnstructuredGridRepresentation)/SurfaceRepresentation/OSPRayScaleFunction/PiecewiseFunction"/>
+      <Item id="56006" name="OpacityTransferFunction" logname="simpleBattery.foam(UnstructuredGridRepresentation)/PointGaussianRepresentation/OpacityTransferFunction/PiecewiseFunction"/>
+      <Item id="55904" name="PolarAxes" logname="simpleBattery.foam(UnstructuredGridRepresentation)/PolarAxes/PolarAxesRepresentation"/>
+      <Item id="56007" name="ScaleTransferFunction" logname="simpleBattery.foam(UnstructuredGridRepresentation)/PointGaussianRepresentation/ScaleTransferFunction/PiecewiseFunction"/>
     </ProxyCollection>
     <ProxyCollection name="pq_helper_proxies.56123">
       <Item id="57937" name="RepresentationAnimationHelper"/>
@@ -17898,7 +17898,7 @@
       <Item id="57843" name="SpreadSheetRepresentation1" logname="Calculator1(SpreadSheetRepresentation)"/>
       <Item id="57865" name="SpreadSheetRepresentation2" logname="DescriptiveStatistics1(SpreadSheetRepresentation)"/>
       <Item id="57876" name="SpreadSheetRepresentation3" logname="DescriptiveStatistics1(SpreadSheetRepresentation)"/>
-      <Item id="56079" name="UnstructuredGridRepresentation1" logname="simpleBattery_copy.foam(UnstructuredGridRepresentation)"/>
+      <Item id="56079" name="UnstructuredGridRepresentation1" logname="simpleBattery.foam(UnstructuredGridRepresentation)"/>
       <Item id="56333" name="UnstructuredGridRepresentation2" logname="Threshold1(UnstructuredGridRepresentation)"/>
       <Item id="57823" name="UnstructuredGridRepresentation5" logname="Clip2(UnstructuredGridRepresentation)"/>
     </ProxyCollection>
@@ -17922,7 +17922,7 @@
       <Item id="57379" name="Glyph1" logname="Glyph1"/>
       <Item id="57900" name="PlotSelectionOverTime1" logname="PlotSelectionOverTime1"/>
       <Item id="56123" name="Threshold1" logname="Threshold1"/>
-      <Item id="55867" name="simpleBattery_copy.foam" logname="simpleBattery_copy.foam"/>
+      <Item id="55867" name="simpleBattery.foam" logname="simpleBattery.foam"/>
     </ProxyCollection>
     <ProxyCollection name="timekeeper">
       <Item id="46300" name="TimeKeeper1"/>

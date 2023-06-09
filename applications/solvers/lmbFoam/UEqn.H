@@ -11,8 +11,10 @@
     (
         fvm::ddt(U)
       + fvm::div(phi, U)
+      //- fvc::div(phiB, 2.0*DBU*B)
       - fvm::laplacian(nuEff, U)
       - (fvc::grad(U) & fvc::grad(nuEff))
+      //+ fvc::grad(DBU*magSqr(B))
      ==
         alpha1*bodyForce
     );

@@ -26,6 +26,20 @@
         mesh
     );
 
+    // Read induced magnetic field
+    volVectorField B
+    (
+	IOobject
+	(
+	    "B",
+	    runTime.timeName(),
+	    mesh,
+	    IOobject::MUST_READ,
+	    IOobject::AUTO_WRITE
+	),
+	mesh
+    );
+
     dimensionedScalar conductivity1
     (
         twoPhaseProperties.subDict("phase1").lookup("conductivity")

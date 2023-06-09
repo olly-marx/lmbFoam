@@ -66,4 +66,4 @@ elif folder == "Bext":
     plt.xlabel("$B_{ext}$ (T)")
 plt.ylabel("$d_2$ (m)")
 # save the figure
-plt.savefig("results/d2GlobalMinimum_"+folder+"Study.pdf",bbox_inches='tight')
+plt.savefig("results/d2GlobalMinimum_"+folder+"Study.png",bbox_inches='tight')

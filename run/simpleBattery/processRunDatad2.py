@@ -21,13 +21,12 @@ from paraview.simple import *
 print("START: Generating d2 data for parameter "+str(name)+" with value "+str(value)+" and boundary conditions "+str(boundaryConditions)+"...")
 
 # create a new 'OpenFOAMReader'
-simpleBattery_copyfoam =
-OpenFOAMReader(registrationName='simpleBattery.foam', FileName='./simpleBattery.foam')
-simpleBattery_copyfoam.MeshRegions = ['internalMesh']
-simpleBattery_copyfoam.CellArrays = ['alpha1']
+simpleBatteryfoam = OpenFOAMReader(registrationName='simpleBattery.foam', FileName='./simpleBattery.foam')
+simpleBatteryfoam.MeshRegions = ['internalMesh']
+simpleBatteryfoam.CellArrays = ['alpha1']
 
 # create a new 'Contour'
-contour1 = Contour(registrationName='Contour1', Input=simpleBattery_copyfoam)
+contour1 = Contour(registrationName='Contour1', Input=simpleBatteryfoam)
 contour1.ContourBy = ['POINTS', 'alpha1']
 contour1.Isosurfaces = [0.5]
 contour1.PointMergeMethod = 'Uniform Binning'

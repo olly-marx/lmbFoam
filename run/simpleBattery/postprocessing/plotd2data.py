@@ -61,4 +61,4 @@ plt.legend(fontsize=10)
 plt.xlabel("time (s)")
 plt.ylabel("$d_2$ (m)")
 # save the figure
-plt.savefig("results/d2AllRuns_"+folder+bcs+"Study.pdf",bbox_inches='tight')
+plt.savefig("results/d2AllRuns_"+folder+bcs+"Study.png",bbox_inches='tight')

@@ -43,4 +43,4 @@
 # 1 "files"
 lmbFoam.C
 
-EXE = $(FOAM_USER_APPBIN)/myLmbFoam
+EXE = $(FOAM_USER_APPBIN)/lmbFoam
