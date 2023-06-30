@@ -113,6 +113,17 @@ int main(int argc, char *argv[])
             // Update total pressure field
 #           include "pEqn.H"
 
+	    // OJM40
+	    // --- B-PISO loop
+
+	    const dictionary& Bpiso = mesh.solutionDict().subDict("BPISO");
+	    int nBcorr(readInt(Bpiso.lookup("nCorrectors")));
+
+	    for(int Bcorr=0; Bcorr<nBcorr; Bcorr++)
+	    {
+//#	       include "BEqn.H"
+	    }
+
             // Update free surface
 #           include "alphaEqn.H"
 
@@ -124,32 +135,34 @@ int main(int argc, char *argv[])
 	    volScalarField divPhi = fvc::div(phi);
 
 	    label patchi = mesh.boundaryMesh().findPatchID("lithiumInterface");
-
-	    scalarField alphaLithiumInterface = alpha1.boundaryField()[patchi];
+	    if(patchi >= 0)
+	    {
+		    scalarField alphaLithiumInterface = alpha1.boundaryField()[patchi];
 
 	    scalar alphaMax = gMax(alphaLithiumInterface);
 	    Info<< "alphaMax = " << alphaMax << endl;
 
-	    if(alphaMax > 0.4)
-	    {
-		Info<< "FATAL CONDITION: SHORT CIRCUIT DETECTED" << endl;
+		    if(alphaMax > 0.4)
+		    {
+			Info<< "FATAL CONDITION: SHORT CIRCUIT DETECTED" << endl;
 
-		Info<< "ExecutionTime = " << runTime.elapsedCpuTime() << " s"
-		    << "  ClockTime = " << runTime.elapsedClockTime() << " s"
-		    << nl << "End\n" << endl;
-		// Write data and then exit
-		Info<< "Writing data at time " << runTime.timeName() << endl;
-		alpha1.write();
-		exit(0);
-	    }
-	    else if(alphaMax > 1.0e-10)
-	    {
-		Info<< "Nearing Short Circuit Condition" << nl 
-			<< "Writing data at time " << runTime.timeName() << endl;
+			Info<< "ExecutionTime = " << runTime.elapsedCpuTime() << " s"
+			    << "  ClockTime = " << runTime.elapsedClockTime() << " s"
+			    << nl << "End\n" << endl;
+			// Write data and then exit
+			Info<< "Writing data at time " << runTime.timeName() << endl;
 			alpha1.write();
+			exit(0);
+		    }
+		    else if(alphaMax > 1.0e-10)
+		    {
+			Info<< "Nearing Short Circuit Condition" << nl 
+				<< "Writing data at time " << runTime.timeName() << endl;
+				alpha1.write();
+		    }
 	    }
 
-            turbulence->correct();
+            //turbulence->correct();
         }
 
 	Info<< "Writing data at time " << runTime.timeName() << endl;

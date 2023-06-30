@@ -1,0 +1,42 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:     5.0                                |
+|   \\  /    A nd           | Web:         http://www.foam-extend.org         |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0";
+    object      conductivity;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [-1 -3 3 0 0 2 0];
+
+internalField   uniform 288;
+
+boundaryField
+{
+    liquidToSteelInterface
+    {
+        type            regionCoupling;
+        remoteField     solidConductivity;
+        value           uniform 288;
+    }
+    liquidToLithiumInterface
+    {
+        type            regionCoupling;
+        remoteField     solidConductivity;
+        value           uniform 288;
+    }
+    topSurface
+    {
+        type            zeroGradient;
+    }
+}
+
+// ************************************************************************* //

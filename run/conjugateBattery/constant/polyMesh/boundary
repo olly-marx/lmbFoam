@@ -1,0 +1,55 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:     5.0                                |
+|   \\  /    A nd           | Web:         http://www.foam-extend.org         |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       polyBoundaryMesh;
+    location    "constant/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+3
+(
+    liquidToSteelInterface
+    {
+        type            regionCouple;
+        nFaces          8400;
+        startFace       186000;
+        shadowRegion    solid;
+        shadowPatch     steelInterface;
+        zone            liquidToSteelInterfaceZone;
+        attached        off;
+        master          on;
+        isWall          on;
+        bridgeOverlap   off;
+    }
+    liquidToLithiumInterface
+    {
+        type            regionCouple;
+        nFaces          2000;
+        startFace       194400;
+        shadowRegion    solid;
+        shadowPatch     lithiumInterface;
+        zone            liquidToLithiumInterfaceZone;
+        attached        off;
+        master          on;
+        isWall          on;
+        bridgeOverlap   off;
+    }
+    topSurface
+    {
+        type            patch;
+        nFaces          1600;
+        startFace       196400;
+    }
+)
+
+
+// ************************************************************************* //

@@ -1,0 +1,40 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:     5.0                                |
+|   \\  /    A nd           | Web:         http://www.foam-extend.org         |
+|    \\/     M anipulation  | For copyright notice see file Copyright         |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      nut;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 2 -1 0 0 0 0];
+
+internalField   uniform 0;
+
+boundaryField
+{
+    liquidToSteelInterface
+    {
+        type            nutkWallFunction;
+        value           uniform 0;
+    }
+    liquidToLithiumInterface
+    {
+        type            nutkWallFunction;
+        value           uniform 0;
+    }
+    topSurface
+    {
+        type            zeroGradient;
+        value           uniform 0;
+    }
+}
+
+// ************************************************************************* //

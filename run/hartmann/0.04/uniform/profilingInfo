@@ -1,0 +1,152 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:     5.0                                |
+|   \\  /    A nd           | Web:         http://www.foam-extend.org         |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       regIOobject;
+    location    "0.04/uniform";
+    object      profilingInfo;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+profilingInfo
+(
+
+    {
+        id              13;
+        parentId        12;
+        description     "Foam::Time::writeObject - outputTime";
+        calls           8;
+        totalTime       0.118352;
+        childTime       0;
+        onStack         1;
+    }
+
+    {
+        id              12;
+        parentId        1;
+        description     "Foam::Time::writeObject";
+        calls           8;
+        totalTime       0.118415;
+        childTime       0.118352;
+        onStack         1;
+    }
+
+    {
+        id              1;
+        description     "application::main";
+        calls           1;
+        totalTime       0.453324;
+        childTime       0.324343;
+        onStack         1;
+    }
+
+    {
+        id              5;
+        parentId        1;
+        description     "functionObjectList::read";
+        calls           1;
+        totalTime       3e-06;
+        childTime       0;
+        onStack         0;
+    }
+
+    {
+        id              9;
+        parentId        1;
+        description     "fvMatrix::solve_U";
+        calls           16;
+        totalTime       0.015897;
+        childTime       0.014974;
+        onStack         0;
+    }
+
+    {
+        id              6;
+        parentId        1;
+        description     "fvMatrix::solve_Voltage";
+        calls           16;
+        totalTime       0.009638;
+        childTime       0.009112;
+        onStack         0;
+    }
+
+    {
+        id              2;
+        parentId        1;
+        description     "fvMatrix::solve_pd";
+        calls           33;
+        totalTime       0.18039;
+        childTime       0.178908;
+        onStack         0;
+    }
+
+    {
+        id              10;
+        parentId        9;
+        description     "lduMatrix::solver_Ux";
+        calls           16;
+        totalTime       0.007664;
+        childTime       0;
+        onStack         0;
+    }
+
+    {
+        id              11;
+        parentId        9;
+        description     "lduMatrix::solver_Uy";
+        calls           16;
+        totalTime       0.00731;
+        childTime       0;
+        onStack         0;
+    }
+
+    {
+        id              7;
+        parentId        6;
+        description     "lduMatrix::solver_Voltage";
+        calls           16;
+        totalTime       0.009112;
+        childTime       9.2e-05;
+        onStack         0;
+    }
+
+    {
+        id              3;
+        parentId        2;
+        description     "lduMatrix::solver_pd";
+        calls           33;
+        totalTime       0.178908;
+        childTime       0.002235;
+        onStack         0;
+    }
+
+    {
+        id              4;
+        parentId        3;
+        description     "lduMatrix::solver_topLevelCorr";
+        calls           660;
+        totalTime       0.002235;
+        childTime       0;
+        onStack         0;
+    }
+
+    {
+        id              8;
+        parentId        7;
+        description     "lduMatrix::solver_topLevelCorr";
+        calls           16;
+        totalTime       9.2e-05;
+        childTime       0;
+        onStack         0;
+    }
+);
+
+
+// ************************************************************************* //

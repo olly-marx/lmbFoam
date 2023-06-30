@@ -56,6 +56,20 @@ solvers
         tolerance         1e-8;
         relTol            0.0;
     }
+    B // OJM40
+    {
+        solver           BiCGStab;
+        preconditioner   DILU;
+        tolerance        1e-05;
+        relTol           0;
+    }
+    pB // OJM40
+    {
+        solver           CG;
+        preconditioner   Cholesky;
+        tolerance        1e-05;
+        relTol           0;
+    }
 }
 
 PISO
@@ -69,6 +83,12 @@ PIMPLE
     nNonOrthogonalCorrectors 0;
     pdRefCell 0;
     pdRefValue 0;
+}
+
+// OJM40
+BPISO
+{
+    nCorrectors     3;
 }
 
 relaxationFactors

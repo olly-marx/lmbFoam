@@ -11,10 +11,10 @@
     (
         fvm::ddt(U)
       + fvm::div(phi, U)
-      //- fvc::div(phiB, 2.0*DBU*B)
+      //- fvc::div(phiB, 2.0*DBU*(Bext + B)) // OJM40
       - fvm::laplacian(nuEff, U)
       - (fvc::grad(U) & fvc::grad(nuEff))
-      //+ fvc::grad(DBU*magSqr(B))
+      //+ fvc::grad(DBU*magSqr(Bext + B)) // OJM40
      ==
         alpha1*bodyForce
     );
