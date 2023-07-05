@@ -809,7 +809,6 @@ lmbFoam.dep: createControls.H
 lmbFoam.dep: $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/createTimeControls.H
 lmbFoam.dep: createFields.H
 lmbFoam.dep: $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/createPhi.H
-lmbFoam.dep: createPhiB.H
 lmbFoam.dep: pdInitEqn.H
 lmbFoam.dep: pEqn.H
 lmbFoam.dep: createBodyForce.H
@@ -829,7 +828,6 @@ lmbFoam.dep: UEqn.H
 lmbFoam.dep: pdEqn.H
 lmbFoam.dep: $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/movingMeshContinuityErrs.H
 lmbFoam.dep: $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/continuityErrs.H
-lmbFoam.dep: alphaEqn.H
 $(OBJECTS_DIR)/lmbFoam.o: $(EXE_DEP)
 $(OBJECTS_DIR)/lmbFoam.o:
 	@SOURCE_DIR=.

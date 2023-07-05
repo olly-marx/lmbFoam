@@ -21,11 +21,14 @@ defaultFieldValues
     volScalarFieldValue conductivity 288
 );
 
+// Variable to store the height of the electrolyte layer
+h 0.03;
+
 regions
 (
     boxToCell
     {
-        box (-10 -10 -10) (10 10 0.03);
+        box (-10 -10 -10) (10 10 $h);
         fieldValues
         (
             volScalarFieldValue alpha1 1

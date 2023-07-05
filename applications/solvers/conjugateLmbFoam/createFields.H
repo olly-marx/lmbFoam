@@ -51,6 +51,37 @@
     volScalarField gh("gh", g & mesh.C());
     surfaceScalarField ghf("ghf", g & mesh.Cf());
 
+    // OJM40
+
+    dimensionedScalar nu1
+    (
+	twoPhaseProperties.subDict("phase1").lookup("nu")
+    );
+    dimensionedScalar nu2
+    (
+     	twoPhaseProperties.subDict("phase2").lookup("nu")
+    );
+    dimensionedScalar mu1
+    (
+     	twoPhaseProperties.subDict("phase1").lookup("mu")
+    );
+    dimensionedScalar mu2
+    (
+     	twoPhaseProperties.subDict("phase2").lookup("mu")
+    );
+    dimensionedScalar conductivity1
+    (
+     	twoPhaseProperties.subDict("phase1").lookup("conductivity")
+    );
+    dimensionedScalar conductivity2
+    (
+     	twoPhaseProperties.subDict("phase2").lookup("conductivity")
+    );
+    dimensionedScalar sigma_ST
+    (
+     	twoPhaseProperties.lookup("sigma")
+    );
+
     const dimensionedScalar& rho1 = twoPhaseProperties.rho1();
     const dimensionedScalar& rho2 = twoPhaseProperties.rho2();
 

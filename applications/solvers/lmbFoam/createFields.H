@@ -100,63 +100,6 @@
         dimensionedScalar("zero", pd.dimensions(), 0)
     );
 
-    // OJM40
-    Info<< "Reading field pB\n" << endl;
-    volScalarField pB
-    (
-	IOobject
-	(
-	    "pB",
-	    runTime.timeName(),
-	    mesh,
-	    IOobject::MUST_READ,
-	    IOobject::AUTO_WRITE
-	),
-	mesh
-    );
-
-    Info<< "Reading field B\n" << endl;
-    volVectorField B
-    (
-     	IOobject
-	(
-	    "B",
-	    runTime.timeName(),
-	    mesh,
-	    IOobject::MUST_READ,
-	    IOobject::AUTO_WRITE
-	),
-	mesh
-    );
-
-#   include "createPhiB.H"
-
-    volScalarField DB // OJM40 HELP
-    (
-        IOobject
-        (
-            "DB",
-            runTime.timeName(),
-            mesh,
-            IOobject::NO_READ,
-            IOobject::AUTO_WRITE
-        ),
-        scalar(1)/(alpha1*mu1*conductivity1 + (scalar(1) - alpha1)*mu2*conductivity2)
-    );
-
-    volScalarField DBU // OJM40 HELP
-    (
-        IOobject
-        (
-            "DBU",
-            runTime.timeName(),
-            mesh,
-            IOobject::NO_READ,
-            IOobject::AUTO_WRITE
-        ),
-        scalar(1)/(alpha1*rho1*mu1 + (scalar(1) - alpha1)*rho2*mu2)
-    );
-
     label pRefCell = 0;
     scalar pRefValue = 0.0;
     setRefCell(pd, mesh.solutionDict().subDict("PIMPLE"), pRefCell, pRefValue);
@@ -164,7 +107,6 @@
     // Set required fluxes
     mesh.schemesDict().setFluxRequired(pd.name());
     mesh.schemesDict().setFluxRequired(alpha1.name());
-    mesh.schemesDict().setFluxRequired(pB.name());
 
     // Construct interface from alpha1 distribution
     interfaceProperties interface(alpha1, U, twoPhaseProperties);

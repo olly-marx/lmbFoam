@@ -51,24 +51,10 @@ solvers
         solver          BiCGStab;
         preconditioner    ILU0;
 
-        minIter           0;
+        minIter           1;
         maxIter           500;
         tolerance         1e-8;
         relTol            0.0;
-    }
-    B // OJM40
-    {
-        solver           BiCGStab;
-        preconditioner   DILU;
-        tolerance        1e-05;
-        relTol           0;
-    }
-    pB // OJM40
-    {
-        solver           CG;
-        preconditioner   Cholesky;
-        tolerance        1e-05;
-        relTol           0;
     }
 }
 
@@ -85,17 +71,11 @@ PIMPLE
     pdRefValue 0;
 }
 
-// OJM40
-BPISO
-{
-    nCorrectors     3;
-}
-
 relaxationFactors
 {
     equations
     {
-        U        1; // 0.8
+        U        1;
         UFinal   1;
     }
     fields

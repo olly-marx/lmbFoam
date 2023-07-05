@@ -78,6 +78,7 @@ int main(int argc, char *argv[])
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
     Info<< "\nStarting time loop\n" << endl;
+    runTime.write();
 
 
     while (runTime.run())
@@ -113,24 +114,14 @@ int main(int argc, char *argv[])
             // Update total pressure field
 #           include "pEqn.H"
 
-	    // OJM40
-	    // --- B-PISO loop
-
-	    const dictionary& Bpiso = mesh.solutionDict().subDict("BPISO");
-	    int nBcorr(readInt(Bpiso.lookup("nCorrectors")));
-
-	    for(int Bcorr=0; Bcorr<nBcorr; Bcorr++)
-	    {
-//#	       include "BEqn.H"
-	    }
-
             // Update free surface
-#           include "alphaEqn.H"
+//#           include "alphaEqn.H"
 
+	    // Find the the maximum height of the free surface
+	    
 	    // Check the alpha field value in each cell on lithiumInterface
 	    // if it is greater than 0, write data and close the program
 	    // else, continue the simulation
-	    //
 
 	    volScalarField divPhi = fvc::div(phi);
 
@@ -157,8 +148,8 @@ int main(int argc, char *argv[])
 		    else if(alphaMax > 1.0e-10)
 		    {
 			Info<< "Nearing Short Circuit Condition" << nl 
-				<< "Writing data at time " << runTime.timeName() << endl;
-				alpha1.write();
+				<<"Writing data at time " << runTime.timeName() << endl;
+			alpha1.write();
 		    }
 	    }
 

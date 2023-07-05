@@ -16,7 +16,9 @@ FoamFile
 
 dimensions      [1 0 -2 0 0 -1 0];
 
-internalField   uniform (0 0 0 );// 5 Gauss - fedor
+B_0 20;
+
+internalField   uniform (0 $B_0 0 );
 
 boundaryField
 {
@@ -32,12 +34,14 @@ boundaryField
 
     lowerWall
     {
-        type            zeroGradient;
+        type            fixedValue;
+	value           uniform (0 $B_0 0);
     }
 
     upperWall
     {
-        type            zeroGradient;
+        type            fixedValue;
+	value           uniform (0 $B_0 0);
     }
 
     frontAndBack

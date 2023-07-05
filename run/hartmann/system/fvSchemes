@@ -36,32 +36,18 @@ divSchemes
     div(((rho*nuEff)*dev2(T(grad(U))))) Gauss linear;
     div(phi,k) Gauss upwind;
     div(phi,epsilon) Gauss upwind;
-
-    // OJM40
-    div(phiB,U)     Gauss linear; // OJM40
-    div(phi,B)      Gauss linear; // OJM40
-    div(phiB,((2*DBU)*B)) Gauss linear; // OJM40
+    div(U^Bext) Gauss linear;	// OJM40
 }
 
 laplacianSchemes
 {
     default         Gauss linear corrected;
     laplacian(rAU,pd) interfaceGauss linear interfaceCorrected;
-
-    // OJM40
-    laplacian(nu,U) Gauss linear corrected; // OJM40
-    laplacian((1|A(U)),p) Gauss linear corrected; // OJM40
-    laplacian(DB,B) Gauss linear corrected; // OJM40
-    laplacian((1|A(B)),pB) Gauss linear corrected; // OJM40
 }
 
 interpolationSchemes
 {
     default         linear;
-
-    // OJM40
-    interpolate(HbyA) linear; // OJM40
-    interpolate(B)  linear; // OJM40
 }
 
 snGradSchemes

@@ -56,20 +56,6 @@ solvers
         tolerance         1e-8;
         relTol            0.0;
     }
-    B // OJM40
-    {
-        solver           BiCGStab;
-        preconditioner   DILU;
-        tolerance        1e-05;
-        relTol           0;
-    }
-    pB // OJM40
-    {
-        solver           CG;
-        preconditioner   Cholesky;
-        tolerance        1e-05;
-        relTol           0;
-    }
 }
 
 PISO
@@ -78,25 +64,19 @@ PISO
 }
 PIMPLE
 {
-    nOuterCorrectors    2;
-    nCorrectors         2;
+    nOuterCorrectors    6;
+    nCorrectors         4;
     nNonOrthogonalCorrectors 0;
     pdRefCell 0;
     pdRefValue 0;
-}
-
-// OJM40
-BPISO
-{
-    nCorrectors     3;
 }
 
 relaxationFactors
 {
     equations
     {
-        U        1; // 0.8
-        UFinal   1;
+        U        0.9;
+        UFinal   0.9;
     }
     fields
     {

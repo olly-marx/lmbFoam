@@ -1,0 +1,236 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:     5.0                                |
+|   \\  /    A nd           | Web:         http://www.foam-extend.org         |
+|    \\/     M anipulation  | For copyright notice see file Copyright         |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvSchemes;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ddtSchemes
+{
+    default Euler;
+}
+
+gradSchemes
+{
+    default Gauss linear;
+    grad(pd) interfaceGauss linear;
+    snGradCorr(pd) interfaceGauss linear;
+}
+
+divSchemes
+{
+    div(phi,U) Gauss linearUpwindV grad(U);
+    div(phi,alpha) Gauss vanLeer01;
+    div(phirb,alpha) Gauss vofCompression;
+    div(((rho*nuEff)*dev2(T(grad(U))))) Gauss linear;
+    div(phi,k) Gauss upwind;
+    div(phi,epsilon) Gauss upwind;
+}
+
+laplacianSchemes
+{
+    default none; //Gauss linear corrected;
+    laplacian(nuEff,U) Gauss linear corrected;
+    laplacian(rAU,pd) interfaceGauss linear interfaceCorrected;
+
+    laplacian(DepsilonEff,epsilon) Gauss linear corrected;
+    laplacian(DkEff,k) Gauss linear corrected;
+
+    laplacian(conductivity,Voltage) Gauss linear corrected;
+}
+
+interpolationSchemes
+{
+    default linear;
+}
+
+snGradSchemes
+{
+    default corrected;
+    snGrad(pd) interfaceCorrected;
+}
+
+// ************************************************************************* //
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:     5.0                                |
+|   \\  /    A nd           | Web:         http://www.foam-extend.org         |
+|    \\/     M anipulation  | For copyright notice see file Copyright         |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+    "p|pd|pdFinal"
+    {
+        solver            amgSolver;
+        cycle             V-cycle;
+//        policy            selectionAMG;
+        policy            cluster;
+        nPreSweeps        1;
+        nPostSweeps       3;
+        groupSize         8;
+        minCoarseEqns     4;
+        nMaxLevels        100;
+        scale             on;
+        smoother          ILUC0;
+
+        minIter           1;
+        maxIter           20;
+        tolerance         1e-8;
+        relTol            0.0;
+    }
+    "(U|UFinal)"
+    {
+        solver            BiCGStab;
+        preconditioner    ILU0;
+
+        minIter           1;
+        maxIter           500;
+        tolerance         1e-8;
+        relTol            0.0;
+    }
+    "k|epsilon"
+    {
+        solver            BiCGStab;
+        preconditioner    ILU0;
+
+        minIter           1;
+        maxIter           500;
+        tolerance         1e-8;
+        relTol            0.0;
+    }
+    Voltage_solidVoltage
+    {
+        solver            CG;
+        preconditioner    Cholesky;
+        minIter           0;
+        maxIter           1000;
+        tolerance         1e-8;
+        relTol            0.0;
+    }
+}
+
+PISO
+{
+    cAlpha          1;
+}
+PIMPLE
+{
+    nOuterCorrectors    4;
+    nCorrectors         4;
+    nNonOrthogonalCorrectors 0;
+    pdRefCell 0;
+    pdRefValue 0;
+}
+
+relaxationFactors
+{
+    equations
+    {
+        U 1; // 0.8
+        UFinal 1;
+        // Voltage 0.999;
+    }
+    fields
+    {
+        pd       1;
+    }
+}
+
+isoAdvector
+{
+    // Note: use full Crank-Nicolson when topo changes are not occuring,
+    // otherwise the code resorts to Euler implicit
+//    CrankNicolsonCoeff 0.5;
+
+    // Euler implicit
+    CrankNicolsonCoeff 1;
+
+    gradAlphaNormal true;
+
+    alphaFluxTolerance 1e-12; // 10*SMALL by default
+
+    // Determines which cells are classified as surface cells
+    vof2IsoTol         1e-8; // 1e-8 by default
+
+    clipAlphaTol 1e-6;
+    nAlphaBounds 0;
+    snapAlpha   false; // true
+    extrapolateVelocity yes;
+    secondOrderExtrapolation no;
+}
+
+// ************************************************************************* //
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:     5.0                                |
+|   \\  /    A nd           | Web:         http://www.foam-extend.org         |
+|    \\/     M anipulation  | For copyright notice see file Copyright         |
+\*---------------------------------------------------------------------------*/
+Build  : 5.0-73c2a3d539c2
+Exec   : blockMesh
+Date   : Jul 05 2023
+Time   : 17:16:36
+Host   : "ojm40-OMEN"
+PID    : 414211
+CtrlDict : "/home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/conjugateBattery/system/controlDict"
+Case   : /home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/conjugateBattery
+nProcs : 1
+sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
+allowSystemOperations : Disallowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+
+Creating block mesh from
+    "/home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/conjugateBattery/system/blockMeshDict"
+
+Using #calcEntry at line 22 in file "/home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/conjugateBattery/system/blockMeshDict"
+
+
+--> FOAM FATAL IO ERROR: 
+Loading a shared library using case-supplied code is not enabled by default
+because of security issues. If you trust the code you can enable this
+facility be adding to the InfoSwitches setting in the system controlDict:
+
+    allowSystemOperations 1
+
+The system controlDict is either
+
+    ~/.OpenFOAM/$WM_PROJECT_VERSION/controlDict
+
+or
+
+    $WM_PROJECT_DIR/etc/controlDict
+
+
+
+file: /home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/conjugateBattery/system/blockMeshDict from line 17 to line 20.
+
+    From function static void Foam::dynamicCode::checkSecurity(const char*, const Foam::dictionary&)
+    in file db/dynamicLibrary/dynamicCode/dynamicCode.C at line 75.
+
+FOAM exiting
+

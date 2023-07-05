@@ -13,6 +13,7 @@
             new fvScalarMatrix
             (
                 fvm::laplacian(conductivity, Voltage)
+		== fvc::div(U ^ Bext)
             );
 
         VoltageEqn->relax();
@@ -37,13 +38,20 @@
         
 
     // Currect density
-    currentDensity = conductivity*fvc::grad(Voltage);
+    currentDensity = 
+	    conductivity*
+	    (
+	    - fvc::grad(Voltage)
+	    + (U ^ Bext)
+	    );
     currentDensity.correctBoundaryConditions();
 
     solidCurrentDensity = solidConductivity*fvc::grad(solidVoltage);
     solidCurrentDensity.correctBoundaryConditions();
     
     // Electric current field
-    bodyForce = (currentDensity ^ Bext)/(alpha1*rho1 + (1 - alpha1)*rho2);
+    bodyForce = 
+	    (currentDensity ^ Bext)
+	    /(alpha1*rho1 + (1 - alpha1)*rho2);
     bodyForce.correctBoundaryConditions();
 }

@@ -6,19 +6,14 @@ import os
 
 # for each validation case, fetch the csv file and store in a list
 # there will be a list for the analytical solution and a list for each numerical solution
-# first fetch the numerical solution files and store Bx and Ux data in a list
-# the first file is "hartmann_mhdFoam_M20" columns 1 and 4 are Bx and Ux
+# first fetch the numerical solution files and store Ux data in a list
 # the y value is in column 8
-hartmannFiles = []
-hartmannFiles.append("hartmann_mhdFoam_M1.csv")
-hartmannFiles.append("hartmann_mhdFoam_M20.csv")
-hartmannFiles.append("hartmann_lmbFoam_M20.csv")
 
 # Generate colormap for plotting the data with matplotlib
-# import the colormap from matplotlib
-from matplotlib import cm
-# create a colormap with 4 colors
-colors = cm.get_cmap('tab10', 4)
+# import the pokepallete package
+from pokemonPalette import pokePalette
+# create a pokepallete object with the name of the palette
+colors = pokePalette.get_pokemon_palette("bulbasaur", 6)
 
 # configure matplotlib
 mpl.rcParams['font.family'] = 'serif'
@@ -31,36 +26,12 @@ plt.rc('font', family='serif', size=12)
 Ux = []
 y = []
 
+# create 2D array to store the L1 and L2 norms for each solver and number of cells
+errorDataLmb = []
+errorDataMhd = []
+
 # loop over the files and store the data in the arrays, skip the first line
-for M in [1,5,20]:
-
-    for solver in ["mhdFoam"]:
-        file = "hartmann_" + solver + "_M" + str(M) + ".csv"
-
-        data = np.genfromtxt(file, delimiter=',', skip_header=1)
-        Ux.append(data[:,4])
-        y.append(data[:,8])
-
-        # Normalise the data, Ux by max(Ux)
-        Ux[-1] = Ux[-1]/max(Ux[-1])
-
-        # Pick a marker for each M value
-        if M == 1:
-            mark = 'o'
-            col = colors(1)
-        elif M == 5:
-            mark = 'D'
-            col = colors(2)
-        elif M == 20:
-            mark = 'x'
-            col = colors(3)
-        
-        # plot the data, first the Ux data, the Bx data in the second loop
-        # the color is set by the index of the file in the list
-        # the label should be the solver used and the M value
-        thisLabel = file.split("_")[1] + " (M=" + file.split("_")[2].split(".")[0].replace("M","") + ")"
-        plt.plot(Ux[-1], y[-1], color=col, label=thisLabel, marker=mark, markevery=10, fillstyle='none', \
-                markersize=4, linestyle='none')
+for Ha in [1,5]:
 
     # add the analytical solution
     # the analytical solution is calculated by first creating a mesh of y values
@@ -71,107 +42,170 @@ for M in [1,5,20]:
     yMesh = np.linspace(-1, 1, 1000)
     UxAnalytical = np.zeros(len(yMesh))
 
-    # for each M value, calculate the analytical solution
+    # for each Ha value, calculate the analytical solution
     # first calculate delta for this case
-    if M == 0:
+    if Ha == 0:
         delta = 100000000
     else:
-        delta = 1/M
+        delta = 1/Ha
     y0 = 1.0
 
     # calculate the analytical solution for each y value
     for i in range(len(yMesh)):
-        UxAnalytical[i] = (np.cosh(M) - np.cosh(yMesh[i]/delta))/(np.cosh(M) - 1)
+        UxAnalytical[i] = (np.cosh(Ha) - np.cosh(yMesh[i]/delta))/(np.cosh(Ha) - 1)
 
     # plot the analytical solution
-    thisLabel = "Analytical (M=" + str(M) + ")"
+    thisLabel = "$Ha$=" + str(Ha)
     plt.plot(UxAnalytical, yMesh, color='black', linestyle='-', linewidth=1)
 
-# add the legend
+    # place a label on the plot to the right of the analytical solution depending on the Ha value
+    if Ha == 1:
+        plt.text(0.6, 0.5, thisLabel, horizontalalignment='left', verticalalignment='center')
+    elif Ha == 5:
+        plt.text(0.7, 0.6, thisLabel, horizontalalignment='left', verticalalignment='center')
+    elif Ha == 20:
+        plt.text(0.8, 0.7, thisLabel, horizontalalignment='left', verticalalignment='center')
+
+
+    for solver in ["mhdFoam", "lmbFoam"]:
+        for NCells in [10, 20, 40]:
+            file = "hartmann_" + solver + "_Ha" + str(Ha) + "_NCells" + str(NCells) + ".csv"
+
+            data = np.genfromtxt(file, delimiter=',', skip_header=1)
+            Ux.append(data[:,0])
+            y.append(data[:,4])
+
+            # Normalise the data, Ux by max(Ux)
+            Ux[-1] = Ux[-1]/max(Ux[-1])
+
+            # Pick a marker for each M value
+            if Ha == 1:
+                # circle
+                mark = 'o'
+                colorindex = 0
+            elif Ha == 5:
+                # diamond
+                mark = 'D'
+                colorindex = 2
+            elif Ha == 20:
+                # cross
+                mark = 'x'
+                colorindex = 4
+            
+            # Pick a color for each solver
+            if solver == "mhdFoam":
+                col = colors[colorindex]
+            elif solver == "lmbFoam":
+                col = colors[colorindex+1]
+
+            # Define functions to calculate the L1 and L2 norms
+            def l1_norm(error):
+                return np.sum(np.abs(error))
+
+            def l2_norm(error):
+                return np.sqrt(np.sum(error**2))
+
+            # Calculate the L2 norm of the error between the analytical solution and the numerical solution
+            # first interpolate the analytical solution to the y values of the numerical solution
+            UxAnalyticalInterp = np.interp(y[-1], yMesh, UxAnalytical)
+            # then calculate the error
+            error = Ux[-1] - UxAnalyticalInterp
+
+            # Calculate the L2 norm of the error between the analytical solution and the numerical solution
+            L2norm = l2_norm(error)
+            print("L2 norm for Ha=" + str(Ha) + " and solver " + solver + " is " + str(L2norm))
+
+            # Calculate the L1 norm of the error between the analytical solution and the numerical solution
+            L1norm = l1_norm(error)
+            print("L1 norm for Ha=" + str(Ha) + " and solver " + solver + " is " + str(L1norm))
+
+            # append the an array with the Ha value, number of cells, L1 norm and L2 norm
+            # to the 2D array
+            if solver == "mhdFoam":
+                errorDataMhd.append([Ha, NCells, L1norm, L2norm])
+            elif solver == "lmbFoam":
+                errorDataLmb.append([Ha, NCells, L1norm, L2norm])
+
+            # plot the data, first the Ux data only for NCells=40
+            if NCells == 40:
+                thisLabel = file.split("_")[1] + " ($Ha=$" + \
+                        file.split("_")[2].split(".")[0].replace("Ha","") + ")"
+                plt.plot(Ux[-1], y[-1], color=col, label=thisLabel, marker=mark, \
+                        markevery=10, fillstyle='none', markersize=3, linestyle='none')
+
+# add the legend, where the analytical solution not included
 plt.legend()
 
 # add the axis labels
-plt.xlabel(r'$U_x / U_0$')
+plt.xlabel(r'$u_x / u_0$')
 plt.ylabel(r'$y$')
 
 # set the axis limits
 plt.xlim([0,1.2])
 plt.ylim([-1,1])
 
+# show the figure
+#plt.show()
+
 # save the figure as a pdf, high resolution
 plt.savefig("hartmannValidationU.pdf", dpi=300, bbox_inches='tight')
 
-# clear the figure
+# Clear figure
 plt.clf()
 
-# now do the same for the Bx data
-# create arrays to store the data
-Bx = []
-y = []
+# Now, on the same set of axes plot the L1 and L2 norm for each solver and with NCells
+# as the x axis. Do so for each Ha value, save the plot as a pdf
 
-# loop over the files and store the data in the arrays, skip the first line
-for M in [1,5,20]:
+# First, sort the data by Ha value
+errorDataMhd = sorted(errorDataMhd, key=lambda x: x[0])
+errorDataLmb = sorted(errorDataLmb, key=lambda x: x[0])
 
-    for solver in ["mhdFoam"]:
-        file = "hartmann_" + solver + "_M" + str(M) + ".csv"
+for Ha in [1,5]:
+    # create a list of the L1 and L2 norms for this Ha value, for each solver
+    L1normsMhd = []
+    L2normsMhd = []
+    L1normsLmb = []
+    L2normsLmb = []
+    NCells = []
+    for i in range(len(errorDataMhd)):
+        if errorDataMhd[i][0] == Ha:
+            L1normsMhd.append(errorDataMhd[i][2])
+            L2normsMhd.append(errorDataMhd[i][3])
+            NCells.append(errorDataMhd[i][1])
+    for i in range(len(errorDataLmb)):
+        if errorDataLmb[i][0] == Ha:
+            L1normsLmb.append(errorDataLmb[i][2])
+            L2normsLmb.append(errorDataLmb[i][3])
 
-        data = np.genfromtxt(file, delimiter=',', skip_header=1)
-        Bx.append(data[:,1])
-        y.append(data[:,8])
+    # Make the x axis a numpy array
+    NCells = np.array(NCells)
 
-        # Normalise the data, Bx by max(Ux)
-        # Bx[-1] = Bx[-1]
+    # Now plot y=x and y=2x as reference lines
+    #plt.plot(NCells, NCells, color='black', linestyle='-', linewidth=1)
+    #plt.plot(NCells, 2*NCells, color='black', linestyle='-', linewidth=1)
 
-        # Pick a marker for each M value
-        if M == 1:
-            mark = 'o'
-            col = colors(1)
-        elif M == 5:
-            mark = 'D'
-            col = colors(2)
-        elif M == 20:
-            mark = 'x'
-            col = colors(3)
-        
-        # plot the data, first the Ux data, the Bx data in the second loop
-        # the color is set by the index of the file in the list
-        # the label should be the solver used and the M value
-        thisLabel = file.split("_")[1] + " (M=" + file.split("_")[2].split(".")[0].replace("M","") + ")"
-        plt.plot(Bx[-1], y[-1], color=col, label=thisLabel, marker=mark, markevery=10, fillstyle='none', \
-                markersize=4, linestyle='none')
+    # plot the L1 norm
+    plt.plot(NCells, L1normsMhd, color=colors[0], linestyle='-', marker='o', \
+            markevery=10, fillstyle='none', markersize=3, label=r'$L_1$ (mhdFoam)')
+    plt.plot(NCells, L1normsLmb, color=colors[1], linestyle='-', marker='o', \
+            markevery=10, fillstyle='none', markersize=3, label=r'$L_1$ (lmbFoam)')
 
-    # add the analytical solution
-    # the analytical solution is calculated by first creating a mesh of y values
-    # then calculating the analytical solution for each y value
-    # the mesh is created by using the y values from -1 to 1, and 1000 points
+    # plot the L2 norm
+    plt.plot(NCells, L2normsMhd, color=colors[2], linestyle='--', marker='o', \
+            markevery=10, fillstyle='none', markersize=3, label=r'$L_2$ (mhdFoam)')
+    plt.plot(NCells, L2normsLmb, color=colors[3], linestyle='--', marker='o', \
+            markevery=10, fillstyle='none', markersize=3, label=r'$L_2$ (lmbFoam)')
 
-    # create the mesh
-    yMesh = np.linspace(-1, 1, 1000)
-    BxAnalytical = np.zeros(len(yMesh))
+    # add the legend
+    plt.legend()
 
-    # for each M value, calculate the analytical solution
-    # first calculate delta for this case
-    delta = 1/M
-    y0 = 1.0
+    # add the axis labels
+    plt.xlabel(r'$N_{cells}$')
+    plt.ylabel(r'$L_1$ and $L_2$ norms')
 
-    # calculate the analytical solution for each y value
-    for i in range(len(yMesh)):
-        BxAnalytical[i] = -(yMesh[i]*np.sinh(M) - np.sinh(yMesh[i]/delta))/(np.cosh(M) - 1)
+    # save the figure as a pdf, high resolution
+    plt.savefig("hartmannValidationL1L2_Ha" + str(Ha) + ".pdf", dpi=300, bbox_inches='tight')
 
-    # plot the analytical solution
-    plt.plot(BxAnalytical, yMesh, color='black', linestyle='-', linewidth=1)
-
-# add the legend
-plt.legend()
-
-# add the axis labels
-plt.xlabel(r'$B_x / B_0$')
-plt.ylabel(r'$y$')
-
-# set the axis limits
-plt.xlim([-1,1])
-plt.ylim([-1,1])
-
-# save the figure as a pdf, high resolution
-plt.savefig("hartmannValidationB.pdf", dpi=300, bbox_inches='tight')
+    # Clear figure
+    plt.clf()
 
