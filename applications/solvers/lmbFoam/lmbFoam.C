@@ -38,7 +38,7 @@ Description
     Added electric field model for liquid metal battery
 
 Authors
-    Fedor Misyura.
+    Fedor Misyura, Oliver Marx
 
 Contributor
     Hrvoje Jasak, Wikki Ltd. All rights reserved.
@@ -78,8 +78,6 @@ int main(int argc, char *argv[])
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
     Info<< "\nStarting time loop\n" << endl;
-    runTime.write();
-
 
     while (runTime.run())
     {
@@ -117,46 +115,45 @@ int main(int argc, char *argv[])
             // Update free surface
 //#           include "alphaEqn.H"
 
-	    // Find the the maximum height of the free surface
-	    
-	    // Check the alpha field value in each cell on lithiumInterface
-	    // if it is greater than 0, write data and close the program
-	    // else, continue the simulation
+           // Find the the maximum height of the free surface
+           
+           // Check the alpha field value in each cell on lithiumInterface
+           // if it is greater than 0, write data and close the program
+           // else, continue the simulation
 
-	    volScalarField divPhi = fvc::div(phi);
+           volScalarField divPhi = fvc::div(phi);
 
-	    label patchi = mesh.boundaryMesh().findPatchID("lithiumInterface");
-	    if(patchi >= 0)
-	    {
-		    scalarField alphaLithiumInterface = alpha1.boundaryField()[patchi];
+           label patchi = mesh.boundaryMesh().findPatchID("lithiumInterface");
+           if(patchi >= 0)
+           {
+                   scalarField alphaLithiumInterface = alpha1.boundaryField()[patchi];
 
-	    scalar alphaMax = gMax(alphaLithiumInterface);
-	    Info<< "alphaMax = " << alphaMax << endl;
+           scalar alphaMax = gMax(alphaLithiumInterface);
+           Info<< "alphaMax = " << alphaMax << endl;
 
-		    if(alphaMax > 0.4)
-		    {
-			Info<< "FATAL CONDITION: SHORT CIRCUIT DETECTED" << endl;
+                   if(alphaMax > 0.4)
+                   {
+                       Info<< "FATAL CONDITION: SHORT CIRCUIT DETECTED" << endl;
 
-			Info<< "ExecutionTime = " << runTime.elapsedCpuTime() << " s"
-			    << "  ClockTime = " << runTime.elapsedClockTime() << " s"
-			    << nl << "End\n" << endl;
-			// Write data and then exit
-			Info<< "Writing data at time " << runTime.timeName() << endl;
-			alpha1.write();
-			exit(0);
-		    }
-		    else if(alphaMax > 1.0e-10)
-		    {
-			Info<< "Nearing Short Circuit Condition" << nl 
-				<<"Writing data at time " << runTime.timeName() << endl;
-			alpha1.write();
-		    }
-	    }
+                       Info<< "ExecutionTime = " << runTime.elapsedCpuTime() << " s"
+                           << "  ClockTime = " << runTime.elapsedClockTime() << " s"
+                           << nl << "End\n" << endl;
+                       // Write data and then exit
+                       Info<< "Writing data at time " << runTime.timeName() << endl;
+                       alpha1.write();
+                       exit(0);
+                   }
+                   else if(alphaMax > 1.0e-10)
+                   {
+                       Info<< "Nearing Short Circuit Condition" << nl 
+                               <<"Writing data at time " << runTime.timeName() << endl;
+                       alpha1.write();
+                   }
+           }
 
             //turbulence->correct();
         }
 
-	Info<< "Writing data at time " << runTime.timeName() << endl;
         runTime.write();
 
         Info<< "ExecutionTime = " << runTime.elapsedCpuTime() << " s"

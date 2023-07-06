@@ -35,7 +35,6 @@ divSchemes
     div(((rho*nuEff)*dev2(T(grad(U))))) Gauss linear;
     div(phi,k) Gauss upwind;
     div(phi,epsilon) Gauss upwind;
-    div(U^Bext) Gauss upwind;	// OJM40
 }
 
 laplacianSchemes
@@ -54,6 +53,5 @@ snGradSchemes
     default         corrected;
     snGrad(pd)      interfaceCorrected;
 }
-
 
 // ************************************************************************* //

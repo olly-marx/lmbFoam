@@ -53,21 +53,8 @@
 	conductivity *
 	(
 	- fvc::grad(Voltage)
-	//+ (U ^ Bext)
+	+ (U ^ Bext)
 	)
-    );
-
-    volVectorField UcrossBext
-    (
-	IOobject
-	(
-	    "UcrossBext",
-	    runTime.timeName(),
-	    mesh,
-	    IOobject::NO_READ,
-	    IOobject::AUTO_WRITE
-	),
-	U ^ Bext
     );
 
     volVectorField bodyForce
@@ -81,7 +68,7 @@
             IOobject::AUTO_WRITE
         ),
 	(currentDensity ^ Bext)
-	/ (alpha1*rho1 + (1 - alpha1)*rho2)
+        / (alpha1*rho1 + (1 - alpha1)*rho2)
     );
 
 

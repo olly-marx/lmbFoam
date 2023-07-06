@@ -20,14 +20,11 @@ defaultFieldValues
     volScalarFieldValue alpha1 0
 );
 
-// Variable to store the height of the electrolyte layer
-h 0.029;
-
 regions
 (
     boxToCell
     {
-        box (-10 -10 -10) (10 10 $h);
+        box (-10 -10 -10) (10 10 0.03);
         fieldValues
         (
             volScalarFieldValue alpha1 1

@@ -7,11 +7,11 @@
 \*---------------------------------------------------------------------------*/
 FoamFile
 {
-version     2.0;
-format      ascii;
-class       dictionary;
-location    "system";
-object      controlDict;
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
@@ -27,17 +27,17 @@ endTime         5;
 
 deltaT          0.001;
 
-//writeControl    adjustableRunTime;
-//writeInterval   0.01;			// Changed this to 0.1 from 0.01 - breaks
+writeControl    adjustableRunTime;
+writeInterval   0.01;
 
-writeControl timeStep;
-writeInterval 1;
+// writeControl timeStep;
+// writeInterval 20;
 
 purgeWrite      0;
 
 writeFormat     ascii;
 
-writePrecision  6;
+writePrecision  8;
 
 writeCompression on;
 
@@ -55,10 +55,13 @@ maxAlphaCo      0.8;
 
 maxDeltaT       0.01;
 
-libs ( "libfieldFunctionObjects.so" );
+libs
+(
+   "libforces.so"
+);
 
 functions
-(
+{
 /*	friction
 	{
 	   patches	   (leftWall rightWall lowerWall defaultFaces atmosphere);
@@ -78,19 +81,15 @@ functions
     minMaxPd
     {
         type minMaxField;
-	name pd;
+        functionObjectLibs ("libfieldFunctionObjects.so");
+        name pd;
     }
+    /*
     minMaxU
     {
         type minMaxField;
         functionObjectLibs ("libfieldFunctionObjects.so");
         name U;
-    }
-    minMaxV
-    {
-        type minMaxField;
-        functionObjectLibs ("libfieldFunctionObjects.so");
-        name Voltage;
     }
     minMaxAlpha1
     {
@@ -110,7 +109,9 @@ functions
         functionObjectLibs ("libfieldFunctionObjects.so");
         name nut;
     }
-);
+    */
+}
 
+//#sinclude   "sampling"
 
 // ************************************************************************* //

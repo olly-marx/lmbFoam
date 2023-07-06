@@ -22,20 +22,17 @@ boundaryField
 {
     sideWalls
     {
-        //type            zeroGradient;
         type            fixedValue;
         value           uniform 0;
     }
     bottomWall
     {
-        //type            fixedValue;
-        //value           uniform 0;
         type            zeroGradient;
     }
     lithiumInterface
     {
         type            fixedValue;
-        value           uniform -0.03; // Fedor - potential difference across bismuth
+        value           uniform -0.004; // Fedor - potential difference across bismuth
     }
     topSurface
     {

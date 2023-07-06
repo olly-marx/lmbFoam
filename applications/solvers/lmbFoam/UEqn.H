@@ -13,8 +13,8 @@
       + fvm::div(phi, U)
       - fvm::laplacian(nuEff, U)
       - (fvc::grad(U) & fvc::grad(nuEff))
-     //==
-      //  alpha1*bodyForce
+     ==
+        alpha1*bodyForce
     );
 
     UEqn.relax
