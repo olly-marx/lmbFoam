@@ -1,0 +1,4 @@
+#!/bin/sh
+
+bash ./runParaBField.sh
+bash ./runParaRatio.sh
