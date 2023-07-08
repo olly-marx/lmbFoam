@@ -1,4 +1,4 @@
-    Info<< "Reading field Voltage\n" << endl;
+    Info<< "Reading field Electric Potential\n" << endl;
     volScalarField Voltage
     (
         IOobject
@@ -26,49 +26,49 @@
         mesh
     );
 
-    // Create electric conductivity field
-    volScalarField conductivity
+    // Create electric conductivity field sigmaE
+    volScalarField sigmaE
     (
         IOobject
         (
-            "conductivity",
+            "sigmaE",
             runTime.timeName(),
             mesh,
             IOobject::NO_READ,
             IOobject::AUTO_WRITE
         ),
-        alpha1*conductivity1 + (scalar(1) - alpha1)*conductivity2
+        alpha1*sigmaE1 + (scalar(1) - alpha1)*sigmaE2
     );
 
-    volVectorField currentDensity
+    volVectorField J
     (
         IOobject
         (
-            "currentDensity",
+            "J",
             runTime.timeName(),
             mesh,
             IOobject::NO_READ,
             IOobject::AUTO_WRITE
         ),
-	conductivity *
+        sigmaE*
 	(
 	- fvc::grad(Voltage)
 	+ (U ^ Bext)
 	)
     );
 
-    volVectorField bodyForce
+    volVectorField fL
     (
         IOobject
         (
-            "bodyForce",
+            "fL",
             runTime.timeName(),
             mesh,
             IOobject::NO_READ,
             IOobject::AUTO_WRITE
         ),
-	(currentDensity ^ Bext)
-        / (alpha1*rho1 + (1 - alpha1)*rho2)
+        (J ^ Bext)/
+        (alpha1*rho1 + (1 - alpha1)*rho2)
     );
 
 

@@ -1,0 +1,257 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:     5.0                                |
+|   \\  /    A nd           | Web:         http://www.foam-extend.org         |
+|    \\/     M anipulation  | For copyright notice see file Copyright         |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSchemes;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ddtSchemes
+{
+    default Euler;
+}
+
+gradSchemes
+{
+    default         Gauss linear;
+    grad(pd)        interfaceGauss linear;
+    snGradCorr(pd)  interfaceGauss linear;
+}
+
+divSchemes
+{
+    div(phi,U)  Gauss linearUpwindV grad(U);
+    div(phi,alpha)  Gauss vanLeer01;
+    div(phirb,alpha) Gauss vofCompression;
+    div(((rho*nuEff)*dev2(T(grad(U))))) Gauss linear;
+    div(phi,k) Gauss upwind;
+    div(phi,epsilon) Gauss upwind;
+}
+
+laplacianSchemes
+{
+    default         Gauss linear corrected;
+    laplacian(rAU,pd) interfaceGauss linear interfaceCorrected;
+}
+
+interpolationSchemes
+{
+    default         linear;
+}
+
+snGradSchemes
+{
+    default         corrected;
+    snGrad(pd)      interfaceCorrected;
+}
+
+// ************************************************************************* //
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:     5.0                                |
+|   \\  /    A nd           | Web:         http://www.foam-extend.org         |
+|    \\/     M anipulation  | For copyright notice see file Copyright         |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+    "p|pd|pdFinal|Voltage"
+    {
+        solver            amgSolver;
+        cycle             V-cycle;
+//        policy            selectionAMG;
+        policy            cluster;
+        nPreSweeps        1;
+        nPostSweeps       3;
+        groupSize         8;
+        minCoarseEqns     4;
+        nMaxLevels        100;
+        scale             on;
+        smoother          ILUC0;
+
+        minIter           1;
+        maxIter           20;
+        tolerance         1e-8;
+        relTol            0.0;
+    }
+    "(U|UFinal)"
+    {
+        solver            BiCGStab;
+        preconditioner    ILU0;
+
+        minIter           1;
+        maxIter           500;
+        tolerance         1e-8;
+        relTol            0.0;
+    }
+    "k|epsilon"
+    {
+        solver          BiCGStab;
+        preconditioner    ILU0;
+
+        minIter           1;
+        maxIter           500;
+        tolerance         1e-8;
+        relTol            0.0;
+    }
+}
+
+PISO
+{
+    cAlpha          1;
+}
+PIMPLE
+{
+    nOuterCorrectors    2;
+    nCorrectors         2;
+    nNonOrthogonalCorrectors 0;
+    pdRefCell 0;
+    pdRefValue 0;
+}
+
+relaxationFactors
+{
+    equations
+    {
+        U        1; // 0.8
+        UFinal   1;
+    }
+    fields
+    {
+        pd       1;
+    }
+}
+
+isoAdvector
+{
+    // Note: use full Crank-Nicolson when topo changes are not occuring,
+    // otherwise the code resorts to Euler implicit
+//    CrankNicolsonCoeff 0.5;
+
+    // Euler implicit
+    CrankNicolsonCoeff 1;
+
+    gradAlphaNormal true;
+
+    alphaFluxTolerance 1e-12; // 10*SMALL by default
+
+    // Determines which cells are classified as surface cells
+    vof2IsoTol         1e-8; // 1e-8 by default
+
+    clipAlphaTol 1e-6;
+    nAlphaBounds 0;
+    snapAlpha   false; // true
+    extrapolateVelocity yes;
+    secondOrderExtrapolation no;
+}
+
+// ************************************************************************* //
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:     5.0                                |
+|   \\  /    A nd           | Web:         http://www.foam-extend.org         |
+|    \\/     M anipulation  | For copyright notice see file Copyright         |
+\*---------------------------------------------------------------------------*/
+Build  : 5.0-73c2a3d539c2
+Exec   : lmbFoam
+Date   : Jul 08 2023
+Time   : 21:06:46
+Host   : "ojm40-OMEN"
+PID    : 262044
+CtrlDict : "/home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/hartmannLMB/system/controlDict"
+Case   : /home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/hartmannLMB
+nProcs : 1
+sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
+allowSystemOperations : Disallowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create dynamic mesh for time = 0
+
+--> FOAM Warning : 
+    From function void* Foam::dlOpen(const Foam::fileName&, bool)
+    in file POSIX.C at line 1204
+    dlopen error : libmesquiteMotionSolver.so: cannot open shared object file: No such file or directory
+--> FOAM Warning : 
+    From function bool Foam::dlLibraryTable::open(const Foam::fileName&, bool)
+    in file db/dynamicLibrary/dlLibraryTable/dlLibraryTable.C at line 97
+    could not load "libmesquiteMotionSolver.so"
+--> FOAM Warning : 
+    From function dynamicFvMesh::New(const IOobject& io)
+    in file dynamicFvMesh/newDynamicFvMesh.C at line 46
+    Loading of dynamic mesh library libmesquiteMotionSolver.so unsuccesful. Some dynamic mesh  methods may not be  available
+Selecting dynamicFvMesh staticFvMesh
+
+PIMPLE: no residual control data found. Calculations will employ 2 corrector loops
+
+
+Reading g
+Reading field pd
+
+Reading field alpha1
+
+Reading field U
+
+Reading/calculating face flux field phi
+
+Reading transportProperties
+
+Selecting incompressible transport model Newtonian
+Selecting incompressible transport model Newtonian
+Calculating field g.h
+
+Reading field p
+
+Selecting turbulence model type RASModel
+Selecting RAS turbulence model kEpsilon
+kEpsilonCoeffs
+{
+    Cmu             0.09;
+    C1              1.44;
+    C2              1.92;
+    sigmaEps        1.3;
+}
+
+Number of internal interface faces: 0
+Smoothing alpha field 1 times for curvature calculation.
+amgSolver:  Solving for pd, Initial residual = 1, Final residual = 1.87632e-05, No Iterations 20
+Reading field Electric Potential
+
+
+
+--> FOAM FATAL IO ERROR: 
+Illegal dictionary entry or environment variable name "B0"
+Valid dictionary entries are 
+2
+(
+dimensions
+B_0
+)
+
+
+file: /home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/hartmannLMB/0/Bext from line 17 to line 19.
+
+    From function bool Foam::primitiveEntry::expandVariable(const Foam::string&, const Foam::dictionary&)
+    in file db/dictionary/primitiveEntry/primitiveEntry.C at line 94.
+
+FOAM exiting
+

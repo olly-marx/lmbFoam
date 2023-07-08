@@ -1,22 +1,24 @@
 {
     // Solve electric field equation
-    conductivity = alpha1*conductivity1 + (scalar(1) - alpha1)*conductivity2;
-    conductivity.correctBoundaryConditions();
+    sigmaE = alpha1*sigmaE1 + (scalar(1) - alpha1)*sigmaE2;
+    sigmaE.correctBoundaryConditions();
     
-    solve(fvm::laplacian(conductivity, Voltage));
+    solve(fvm::laplacian(sigmaE, Voltage)
+	//== fvc::div(U ^ Bext)
+    );
 
     // Currect density
-    currentDensity =
-	conductivity * 
+    J =
+        sigmaE *
 	(
-        - fvc::grad(Voltage)
+	- fvc::grad(Voltage)
 	+ (U ^ Bext)
 	);
-    currentDensity.correctBoundaryConditions();
+    J.correctBoundaryConditions();
 
     // Electric current field
-    bodyForce = 
-	    (currentDensity ^ Bext)
-	    / (alpha1*rho1 + (1 - alpha1)*rho2);
-    bodyForce.correctBoundaryConditions();
+    fL = 
+	(J ^ Bext)
+	/(alpha1*rho1 + (1 - alpha1)*rho2);
+    fL.correctBoundaryConditions();
 }

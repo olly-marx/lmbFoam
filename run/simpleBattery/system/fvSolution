@@ -64,8 +64,8 @@ PISO
 }
 PIMPLE
 {
-    nOuterCorrectors    2;
-    nCorrectors         2;
+    nOuterCorrectors    6;
+    nCorrectors         4;
     nNonOrthogonalCorrectors 0;
     pdRefCell 0;
     pdRefValue 0;
@@ -75,8 +75,8 @@ relaxationFactors
 {
     equations
     {
-        U        1; // 0.8
-        UFinal   1;
+        U        0.9; // 0.8
+        UFinal   0.9;
     }
     fields
     {

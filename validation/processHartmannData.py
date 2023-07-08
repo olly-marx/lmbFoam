@@ -4,9 +4,17 @@
 #### import the simple module from the paraview
 from paraview.simple import *
 
+# Get the solver from the command line
+solver = sys.argv[3]
+if(solver=="lmbFoam")
+    directory = "hartmannLMB"
+elif(solver=="mhdFoam")
+    directory = "hartmannMHD"
+
 # get active source.
 # create a new 'OpenFOAMReader'
-hartmannfoam = OpenFOAMReader(registrationName='hartmann.foam', FileName='/home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/hartmann/hartmann.foam')
+hartmannfoam = OpenFOAMReader(registrationName=directory+'.foam', \
+FileName='/home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/hartmann/'+directory+'.foam'
 hartmannfoam.MeshRegions = ['internalMesh']
 hartmannfoam.CellArrays = ['Bext', 'U']
 
@@ -20,7 +28,7 @@ timeKeeper1 = GetTimeKeeper()
 animationScene1.UpdateAnimationUsingDataTimeSteps()
 
 # Properties modified on animationScene1
-animationScene1.AnimationTime = 2.5
+animationScene1.AnimationTime = 1
 
 # create a new 'Plot Over Line'
 plotOverLine1 = PlotOverLine(registrationName='PlotOverLine1', Input=hartmannfoam)
@@ -32,9 +40,6 @@ Ha = sys.argv[1]
 
 # Get the NCells from the command line
 NCells = sys.argv[2]
-
-# Get the solver from the command line
-solver = sys.argv[3]
 
 # Set the file name
 fileName = '/home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/validation/' + \
