@@ -28,8 +28,8 @@ vertices
     (0 1 0.1)
 );
 
-nx 100;
-ny 40;
+nx 400;
+ny 160;
 nz 1;
 
 blocks

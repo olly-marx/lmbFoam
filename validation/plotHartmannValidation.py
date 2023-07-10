@@ -31,7 +31,7 @@ errorDataLmb = []
 errorDataMhd = []
 
 # loop over the files and store the data in the arrays, skip the first line
-for Ha in [1,5]:
+for Ha in [1,5,20]:
 
     # add the analytical solution
     # the analytical solution is calculated by first creating a mesh of y values
@@ -64,11 +64,11 @@ for Ha in [1,5]:
     elif Ha == 5:
         plt.text(0.7, 0.6, thisLabel, horizontalalignment='left', verticalalignment='center')
     elif Ha == 20:
-        plt.text(0.8, 0.7, thisLabel, horizontalalignment='left', verticalalignment='center')
+        plt.text(0.85, 0.7, thisLabel, horizontalalignment='left', verticalalignment='center')
 
 
     for solver in ["mhdFoam", "lmbFoam"]:
-        for NCells in [10, 20, 40]:
+        for NCells in [10, 20, 40, 80, 160]:
             file = "hartmann_" + solver + "_Ha" + str(Ha) + "_NCells" + str(NCells) + ".csv"
 
             data = np.genfromtxt(file, delimiter=',', skip_header=1)
@@ -112,12 +112,13 @@ for Ha in [1,5]:
             error = Ux[-1] - UxAnalyticalInterp
 
             # Calculate the L2 norm of the error between the analytical solution and the numerical solution
-            L2norm = l2_norm(error)
-            print("L2 norm for Ha=" + str(Ha) + " and solver " + solver + " is " + str(L2norm))
-
-            # Calculate the L1 norm of the error between the analytical solution and the numerical solution
             L1norm = l1_norm(error)
-            print("L1 norm for Ha=" + str(Ha) + " and solver " + solver + " is " + str(L1norm))
+            L2norm = l2_norm(error)
+
+            # Print Solver, NCells, Ha, L1 norm and L2 norm
+            print(solver + ", Res:" + str(NCells) + ", Ha:" + str(Ha) \
+                    + "\nL1 norm:" + str(L1norm) + "\nL2 norm:" + str(L2norm))
+
 
             # append the an array with the Ha value, number of cells, L1 norm and L2 norm
             # to the 2D array
@@ -160,7 +161,7 @@ plt.clf()
 errorDataMhd = sorted(errorDataMhd, key=lambda x: x[0])
 errorDataLmb = sorted(errorDataLmb, key=lambda x: x[0])
 
-for Ha in [1,5]:
+for Ha in [1,5, 20]:
     # create a list of the L1 and L2 norms for this Ha value, for each solver
     L1normsMhd = []
     L2normsMhd = []
@@ -180,9 +181,9 @@ for Ha in [1,5]:
     # Make the x axis a numpy array
     NCells = np.array(NCells)
 
-    # Now plot y=x and y=2x as reference lines
-    #plt.plot(NCells, NCells, color='black', linestyle='-', linewidth=1)
-    #plt.plot(NCells, 2*NCells, color='black', linestyle='-', linewidth=1)
+    # Now plot y=-x and y=-2x as reference lines
+    plt.plot(NCells, -NCells, color='black', linestyle='-', linewidth=1)
+    plt.plot(NCells, -2*NCells, color='black', linestyle='-', linewidth=1)
 
     # plot the L1 norm
     plt.plot(NCells, L1normsMhd, color=colors[0], linestyle='-', marker='o', \

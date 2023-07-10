@@ -21,18 +21,15 @@ dt=$4
 if [ $solver = "lmbFoam" ]
 then
     dir=hartmannLMB
-    sed -i "19s/.*/B_0 $Ha;/" $dir/0/Bext
+    sed -i "19s/.*/B0 $Ha;/" $dir/0/Bext
 elif [ $solver = "mhdFoam" ]
 then
     dir=hartmannMHD
-    sed -i "19s/.*/B_0 $Ha;/" $dir/0/B
+    sed -i "19s/.*/B0 $Ha;/" $dir/0/B
 fi
 
 # Clear the case
-pyFoamClearCase.py .
-
-# And the .log files
-rm $dir/log.*
+pyFoamClearCase.py $dir
 
 # Calculate the number of cells in x and y directions, based on the resolution
 # ny = res, nx = 2.5*ny
@@ -58,3 +55,10 @@ runApplication blockMesh
 # Run the simulation
 runApplication setFields
 runApplication $solver
+
+# And the .log files
+mv log.$solver ./logs/log.Ha$Ha.N$ny.$solver
+mv log.blockMesh ./logs/log.Ha$Ha.N$ny.blockMesh
+mv log.setFields ./logs/log.Ha$Ha.N$ny.setFields
+
+# paraFoam

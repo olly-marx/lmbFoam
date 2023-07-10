@@ -172,10 +172,10 @@ isoAdvector
 \*---------------------------------------------------------------------------*/
 Build  : 5.0-73c2a3d539c2
 Exec   : setFields
-Date   : Jul 08 2023
-Time   : 21:06:46
+Date   : Jul 10 2023
+Time   : 13:34:48
 Host   : "ojm40-OMEN"
-PID    : 262041
+PID    : 335579
 CtrlDict : "/home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/hartmannLMB/system/controlDict"
 Case   : /home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/hartmannLMB
 nProcs : 1

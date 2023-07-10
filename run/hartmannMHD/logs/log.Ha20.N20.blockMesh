@@ -1,0 +1,170 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:     5.0                                |
+|   \\  /    A nd           | Web:         http://www.foam-extend.org         |
+|    \\/     M anipulation  | For copyright notice see file Copyright         |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSchemes;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ddtSchemes
+{
+    default Euler;
+}
+
+gradSchemes
+{
+    default         Gauss linear;
+    grad(p)         Gauss linear;
+    grad((DBU*magSqr(B))) Gauss linear;
+}
+
+divSchemes
+{
+    default         none;
+    div(phi,U)      Gauss linear;
+    div(phiB,U)     Gauss linear;
+    div(phi,B)      Gauss linear;
+    div(phiB,((2*DBU)*B)) Gauss linear;
+}
+
+laplacianSchemes
+{
+    default         none;
+    laplacian(nu,U) Gauss linear corrected;
+    laplacian((1|A(U)),p) Gauss linear corrected;
+    laplacian(DB,B) Gauss linear corrected;
+    laplacian((1|A(B)),pB) Gauss linear corrected;
+}
+
+interpolationSchemes
+{
+    default         linear;
+    interpolate(HbyA) linear;
+    interpolate(B)  linear;
+}
+
+snGradSchemes
+{
+    default         corrected;
+}
+
+// ************************************************************************* //
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:     5.0                                |
+|   \\  /    A nd           | Web:         http://www.foam-extend.org         |
+|    \\/     M anipulation  | For copyright notice see file Copyright         |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+    p
+    {
+        solver           CG;
+        preconditioner   Cholesky;
+        tolerance        1e-06;
+        relTol           0;
+    }
+    U
+    {
+        solver           BiCGStab;
+        preconditioner   DILU;
+        tolerance        1e-05;
+        relTol           0;
+    }
+    B
+    {
+        solver           BiCGStab;
+        preconditioner   DILU;
+        tolerance        1e-05;
+        relTol           0;
+    }
+    pB
+    {
+        solver           CG;
+        preconditioner   Cholesky;
+        tolerance        1e-05;
+        relTol           0;
+    }
+}
+
+PISO
+{
+    nCorrectors     3;
+    nNonOrthogonalCorrectors 0;
+}
+
+BPISO
+{
+    nCorrectors     3;
+}
+
+// ************************************************************************* //
+/*---------------------------------------------------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:     5.0                                |
+|   \\  /    A nd           | Web:         http://www.foam-extend.org         |
+|    \\/     M anipulation  | For copyright notice see file Copyright         |
+\*---------------------------------------------------------------------------*/
+Build  : 5.0-73c2a3d539c2
+Exec   : blockMesh
+Date   : Jul 10 2023
+Time   : 12:57:59
+Host   : "ojm40-OMEN"
+PID    : 334575
+CtrlDict : "/home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/hartmannMHD/system/controlDict"
+Case   : /home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/hartmannMHD
+nProcs : 1
+sigFpe : Enabling floating point exception trapping (FOAM_SIGFPE).
+allowSystemOperations : Disallowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+
+Creating block mesh from
+    "/home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/hartmannMHD/system/blockMeshDict"
+
+
+Creating block mesh topology
+
+Creating polyMesh from blockMesh
+
+Writing polyMesh
+----------------
+Mesh Information
+----------------
+  boundingBox: (0 -1 0) (20 1 0.1)
+  nPoints: 2142
+  nCells: 1000
+  nFaces: 4070
+  nInternalFaces: 1930
+----------------
+Patches
+----------------
+  patch 0 (start: 1930 size: 20) name: inlet
+  patch 1 (start: 1950 size: 20) name: outlet
+  patch 2 (start: 1970 size: 50) name: lowerWall
+  patch 3 (start: 2020 size: 50) name: upperWall
+  patch 4 (start: 2070 size: 2000) name: frontAndBack
+
+End
+

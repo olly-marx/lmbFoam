@@ -172,10 +172,10 @@ isoAdvector
 \*---------------------------------------------------------------------------*/
 Build  : 5.0-73c2a3d539c2
 Exec   : blockMesh
-Date   : Jul 08 2023
-Time   : 21:06:46
+Date   : Jul 10 2023
+Time   : 13:34:48
 Host   : "ojm40-OMEN"
-PID    : 262038
+PID    : 335576
 CtrlDict : "/home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/hartmannLMB/system/controlDict"
 Case   : /home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/hartmannLMB
 nProcs : 1
@@ -199,18 +199,18 @@ Writing polyMesh
 Mesh Information
 ----------------
   boundingBox: (0 -1 0) (20 1 0.1)
-  nPoints: 8282
-  nCells: 4000
-  nFaces: 16140
-  nInternalFaces: 7860
+  nPoints: 129122
+  nCells: 64000
+  nFaces: 256560
+  nInternalFaces: 127440
 ----------------
 Patches
 ----------------
-  patch 0 (start: 7860 size: 40) name: inlet
-  patch 1 (start: 7900 size: 40) name: outlet
-  patch 2 (start: 7940 size: 100) name: lowerWall
-  patch 3 (start: 8040 size: 100) name: upperWall
-  patch 4 (start: 8140 size: 8000) name: frontAndBack
+  patch 0 (start: 127440 size: 160) name: inlet
+  patch 1 (start: 127600 size: 160) name: outlet
+  patch 2 (start: 127760 size: 400) name: lowerWall
+  patch 3 (start: 128160 size: 400) name: upperWall
+  patch 4 (start: 128560 size: 128000) name: frontAndBack
 
 End
 
