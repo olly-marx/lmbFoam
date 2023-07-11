@@ -1,15 +1,14 @@
 /*--------------------------------*- C++ -*----------------------------------*\
 | =========                 |                                                 |
-| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
-|  \\    /   O peration     | Version:  2212                                  |
-|   \\  /    A nd           | Website:  www.openfoam.com                      |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:     5.0                                |
+|   \\  /    A nd           | Web:         http://www.foam-extend.org         |
 |    \\/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
 FoamFile
 {
     version     2.0;
     format      ascii;
-    arch        "LSB;label=32;scalar=64";
     class       polyBoundaryMesh;
     location    "constant/polyMesh";
     object      boundary;
@@ -30,7 +29,6 @@ FoamFile
         master          on;
         isWall          on;
         bridgeOverlap   off;
-        faces           ( ( 0 16 17 1 ) ( 1 17 18 2 ) ( 2 18 19 3 ) ( 3 19 23 7 ) ( 7 23 27 11 ) ( 11 27 31 15 ) ( 15 31 30 14 ) ( 14 30 29 13 ) ( 13 29 28 12 ) ( 12 28 24 8 ) ( 8 24 20 4 ) ( 4 20 16 0 ) ( 16 32 33 17 ) ( 17 33 34 18 ) ( 18 34 35 19 ) ( 19 35 39 23 ) ( 23 39 43 27 ) ( 27 43 47 31 ) ( 31 47 46 30 ) ( 30 46 45 29 ) ( 29 45 44 28 ) ( 28 44 40 24 ) ( 24 40 36 20 ) ( 20 36 32 16 ) ( 0 1 5 4 ) ( 1 2 6 5 ) ( 2 3 7 6 ) ( 4 5 9 8 ) ( 5 6 10 9 ) ( 6 7 11 10 ) ( 8 9 13 12 ) ( 9 10 14 13 ) ( 10 11 15 14 ) );
     }
     liquidToLithiumInterface
     {
@@ -44,7 +42,6 @@ FoamFile
         master          on;
         isWall          on;
         bridgeOverlap   off;
-        faces           ( ( 21 22 38 37 ) ( 22 26 42 38 ) ( 26 25 41 42 ) ( 25 21 37 41 ) ( 21 25 26 22 ) );
     }
     topSurface
     {
@@ -53,5 +50,6 @@ FoamFile
         startFace       196400;
     }
 )
+
 
 // ************************************************************************* //

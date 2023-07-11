@@ -14,8 +14,6 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-convertToMeters 1;
-
 vertices
 (
     (0 -1 0)
@@ -28,11 +26,11 @@ vertices
     (0 1 0.1)
 );
 
-nx 400;
-ny 160;
+nx 100;
+ny 40;
+nx 800;
+ny 320;
 nz 1;
-
-blocks
 (
     hex (0 1 2 3 4 5 6 7) ($nx $ny $nz) simpleGrading (1 1 1)
 );

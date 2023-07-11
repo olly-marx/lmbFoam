@@ -13,7 +13,8 @@
             new fvScalarMatrix
             (
                 fvm::laplacian(conductivity, Voltage)
-		== fvc::div(U ^ Bext)
+		== 
+		conductivity*fvc::div(U ^ Bext)
             );
 
         VoltageEqn->relax();
@@ -46,7 +47,11 @@
 	    );
     currentDensity.correctBoundaryConditions();
 
-    solidCurrentDensity = solidConductivity*fvc::grad(solidVoltage);
+    solidCurrentDensity = 
+	    solidConductivity*
+	    (
+	    - fvc::grad(solidVoltage)
+	    );
     solidCurrentDensity.correctBoundaryConditions();
     
     // Electric current field

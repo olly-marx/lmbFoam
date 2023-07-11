@@ -35,11 +35,12 @@ divSchemes
     div(((rho*nuEff)*dev2(T(grad(U))))) Gauss linear;
     div(phi,k) Gauss upwind;
     div(phi,epsilon) Gauss upwind;
+    div((U^Bext)) Gauss linear;
 }
 
 laplacianSchemes
 {
-    default none; //Gauss linear corrected;
+    default none;// Gauss linear corrected;
     laplacian(nuEff,U) Gauss linear corrected;
     laplacian(rAU,pd) interfaceGauss linear interfaceCorrected;
 
@@ -125,7 +126,7 @@ solvers
         preconditioner    Cholesky;
         minIter           0;
         maxIter           1000;
-        tolerance         1e-8;
+        tolerance         1e-6;
         relTol            0.0;
     }
 }
@@ -149,7 +150,7 @@ relaxationFactors
     {
         U 1; // 0.8
         UFinal 1;
-        // Voltage 0.999;
+        Voltage 0.9;
     }
     fields
     {
@@ -190,10 +191,10 @@ isoAdvector
 \*---------------------------------------------------------------------------*/
 Build  : 5.0-73c2a3d539c2
 Exec   : blockMesh -region solid
-Date   : Jul 05 2023
-Time   : 17:16:36
+Date   : Jul 11 2023
+Time   : 16:43:22
 Host   : "ojm40-OMEN"
-PID    : 414223
+PID    : 420647
 CtrlDict : "/home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/conjugateBattery/system/controlDict"
 Case   : /home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/conjugateBattery
 nProcs : 1

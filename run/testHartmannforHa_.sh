@@ -54,11 +54,15 @@ runApplication blockMesh
 
 # Run the simulation
 runApplication setFields
-runApplication $solver
+runApplication decomposePar
+mpirun -np 4 $solver -parallel | tee log.$solver
+runApplication reconstructPar
 
 # And the .log files
 mv log.$solver ./logs/log.Ha$Ha.N$ny.$solver
 mv log.blockMesh ./logs/log.Ha$Ha.N$ny.blockMesh
 mv log.setFields ./logs/log.Ha$Ha.N$ny.setFields
+mv log.decomposePar ./logs/log.Ha$Ha.N$ny.decomposePar
+mv log.reconstructPar ./logs/log.Ha$Ha.N$ny.reconstructPar
 
 # paraFoam

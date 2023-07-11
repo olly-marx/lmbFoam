@@ -5,9 +5,9 @@ import os
 import sys
 
 # Loop over the Ha number 1, 5, 20
-Ha = [1, 5, 20]
+Ha = [20]
 # Loop over nYCells 10, 20, 40, 80, 160
-nCells = [10, 20, 40, 80, 160]
+nCells = [320]
 
 # Take the solver name from the command line
 solverNames = ["mhdFoam", "lmbFoam"]
@@ -20,6 +20,7 @@ for sol in solverNames:
         for j in range(len(nCells)):
             # Calculate the stable time step
             dt = 0.02/(nCells[j]*1.5)
+
 
             #Echo the parameters
             print("Ha = " + str(Ha[i]))

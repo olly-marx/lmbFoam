@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
             // Update free surface
 #           include "alphaEqn.H"
 
-            //turbulence->correct();
+            turbulence->correct();
         }
 
         runTime.write();

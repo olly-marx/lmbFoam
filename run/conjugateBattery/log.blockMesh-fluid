@@ -35,11 +35,12 @@ divSchemes
     div(((rho*nuEff)*dev2(T(grad(U))))) Gauss linear;
     div(phi,k) Gauss upwind;
     div(phi,epsilon) Gauss upwind;
+    div((U^Bext)) Gauss linear;
 }
 
 laplacianSchemes
 {
-    default none; //Gauss linear corrected;
+    default none;// Gauss linear corrected;
     laplacian(nuEff,U) Gauss linear corrected;
     laplacian(rAU,pd) interfaceGauss linear interfaceCorrected;
 
@@ -125,7 +126,7 @@ solvers
         preconditioner    Cholesky;
         minIter           0;
         maxIter           1000;
-        tolerance         1e-8;
+        tolerance         1e-6;
         relTol            0.0;
     }
 }
@@ -149,7 +150,7 @@ relaxationFactors
     {
         U 1; // 0.8
         UFinal 1;
-        // Voltage 0.999;
+        Voltage 0.9;
     }
     fields
     {
@@ -190,10 +191,10 @@ isoAdvector
 \*---------------------------------------------------------------------------*/
 Build  : 5.0-73c2a3d539c2
 Exec   : blockMesh
-Date   : Jul 05 2023
-Time   : 17:16:36
+Date   : Jul 11 2023
+Time   : 16:43:20
 Host   : "ojm40-OMEN"
-PID    : 414211
+PID    : 420635
 CtrlDict : "/home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/conjugateBattery/system/controlDict"
 Case   : /home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/conjugateBattery
 nProcs : 1
@@ -207,30 +208,26 @@ Create time
 Creating block mesh from
     "/home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/conjugateBattery/system/blockMeshDict"
 
-Using #calcEntry at line 22 in file "/home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/conjugateBattery/system/blockMeshDict"
 
+Creating block mesh topology
 
---> FOAM FATAL IO ERROR: 
-Loading a shared library using case-supplied code is not enabled by default
-because of security issues. If you trust the code you can enable this
-facility be adding to the InfoSwitches setting in the system controlDict:
+Creating polyMesh from blockMesh
 
-    allowSystemOperations 1
+Writing polyMesh
+----------------
+Mesh Information
+----------------
+  boundingBox: (-0.0585 -0.098 0) (0.0585 0.098 0.05)
+  nPoints: 70121
+  nCells: 64000
+  nFaces: 198000
+  nInternalFaces: 186000
+----------------
+Patches
+----------------
+  patch 0 (start: 186000 size: 8400) name: liquidToSteelInterface
+  patch 1 (start: 194400 size: 2000) name: liquidToLithiumInterface
+  patch 2 (start: 196400 size: 1600) name: topSurface
 
-The system controlDict is either
-
-    ~/.OpenFOAM/$WM_PROJECT_VERSION/controlDict
-
-or
-
-    $WM_PROJECT_DIR/etc/controlDict
-
-
-
-file: /home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/conjugateBattery/system/blockMeshDict from line 17 to line 20.
-
-    From function static void Foam::dynamicCode::checkSecurity(const char*, const Foam::dictionary&)
-    in file db/dynamicLibrary/dynamicCode/dynamicCode.C at line 75.
-
-FOAM exiting
+End
 

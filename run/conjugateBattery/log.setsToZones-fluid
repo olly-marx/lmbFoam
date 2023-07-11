@@ -35,11 +35,12 @@ divSchemes
     div(((rho*nuEff)*dev2(T(grad(U))))) Gauss linear;
     div(phi,k) Gauss upwind;
     div(phi,epsilon) Gauss upwind;
+    div((U^Bext)) Gauss linear;
 }
 
 laplacianSchemes
 {
-    default none; //Gauss linear corrected;
+    default none;// Gauss linear corrected;
     laplacian(nuEff,U) Gauss linear corrected;
     laplacian(rAU,pd) interfaceGauss linear interfaceCorrected;
 
@@ -125,7 +126,7 @@ solvers
         preconditioner    Cholesky;
         minIter           0;
         maxIter           1000;
-        tolerance         1e-8;
+        tolerance         1e-6;
         relTol            0.0;
     }
 }
@@ -149,7 +150,7 @@ relaxationFactors
     {
         U 1; // 0.8
         UFinal 1;
-        // Voltage 0.999;
+        Voltage 0.9;
     }
     fields
     {
@@ -190,10 +191,10 @@ isoAdvector
 \*---------------------------------------------------------------------------*/
 Build  : 5.0-73c2a3d539c2
 Exec   : setsToZones
-Date   : Jul 05 2023
-Time   : 17:16:36
+Date   : Jul 11 2023
+Time   : 16:43:21
 Host   : "ojm40-OMEN"
-PID    : 414217
+PID    : 420641
 CtrlDict : "/home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/conjugateBattery/system/controlDict"
 Case   : /home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/conjugateBattery
 nProcs : 1
@@ -205,13 +206,25 @@ Create time
 
 Create polyMesh for time = 0
 
+Searched : "constant/polyMesh/sets"
+Found    : 
+2
+(
+liquidToSteelInterfaceZone
+liquidToLithiumInterfaceZone
+)
 
 
---> FOAM FATAL ERROR: 
-Cannot find file "points" in directory "polyMesh" in times 0 down to constant
+Using cellSet liquidToSteelInterfaceZoneMasterCells to determine the master side of the face zone liquidToSteelInterfaceZone
 
-    From function Time::findInstance(const fileName&, const word&, const IOobject::readOption, const word&)
-    in file db/Time/findInstance.C at line 198.
+cellSet liquidToSteelInterfaceZoneMasterCells not found or empty.  Setting flipMap to false
 
-FOAM exiting
+Adding set liquidToSteelInterfaceZone as a faceZone.
+Using cellSet liquidToLithiumInterfaceZoneMasterCells to determine the master side of the face zone liquidToLithiumInterfaceZone
 
+cellSet liquidToLithiumInterfaceZoneMasterCells not found or empty.  Setting flipMap to false
+
+Adding set liquidToLithiumInterfaceZone as a faceZone.
+Writing mesh.
+
+End

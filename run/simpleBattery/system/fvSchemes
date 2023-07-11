@@ -35,6 +35,8 @@ divSchemes
     div(((rho*nuEff)*dev2(T(grad(U))))) Gauss linear;
     div(phi,k) Gauss upwind;
     div(phi,epsilon) Gauss upwind;
+    // div scheme for the U cross Bext tem in the voltage equation
+    div((U^Bext)) Gauss linear;
 }
 
 laplacianSchemes

@@ -35,11 +35,12 @@ divSchemes
     div(((rho*nuEff)*dev2(T(grad(U))))) Gauss linear;
     div(phi,k) Gauss upwind;
     div(phi,epsilon) Gauss upwind;
+    div((U^Bext)) Gauss linear;
 }
 
 laplacianSchemes
 {
-    default none; //Gauss linear corrected;
+    default none;// Gauss linear corrected;
     laplacian(nuEff,U) Gauss linear corrected;
     laplacian(rAU,pd) interfaceGauss linear interfaceCorrected;
 
@@ -125,7 +126,7 @@ solvers
         preconditioner    Cholesky;
         minIter           0;
         maxIter           1000;
-        tolerance         1e-8;
+        tolerance         1e-6;
         relTol            0.0;
     }
 }
@@ -149,7 +150,7 @@ relaxationFactors
     {
         U 1; // 0.8
         UFinal 1;
-        // Voltage 0.999;
+        Voltage 0.9;
     }
     fields
     {
@@ -190,10 +191,10 @@ isoAdvector
 \*---------------------------------------------------------------------------*/
 Build  : 5.0-73c2a3d539c2
 Exec   : setSet -batch setSet-fluid.batch
-Date   : Jul 05 2023
-Time   : 17:16:36
+Date   : Jul 11 2023
+Time   : 16:43:21
 Host   : "ojm40-OMEN"
-PID    : 414214
+PID    : 420638
 CtrlDict : "/home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/conjugateBattery/system/controlDict"
 Case   : /home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/conjugateBattery
 nProcs : 1
@@ -205,13 +206,24 @@ Create time
 
 Create polyMesh for time = 0
 
+Time:0  cells:64000  faces:198000  points:70121  patches:3  bb:(-0.0585 -0.098 0) (0.0585 0.098 0.05)
 
+Reading commands from file "setSet-fluid.batch"
+Please type 'help', 'quit' or a set command after prompt.
+Doing:"faceSet liquidToSteelInterfaceZone new patchToFace liquidToSteelInterface"
+    Set:liquidToSteelInterfaceZone  Size:0  Action:new
+    Adding all faces of patch liquidToSteelInterface ...
+    Found matching patch liquidToSteelInterface with 8400 faces.
+    Writing liquidToSteelInterfaceZone (size 8400) to "constant/polyMesh/sets/liquidToSteelInterfaceZone" and to vtk file "VTK/liquidToSteelInterfaceZone/liquidToSteelInterfaceZone_1.vtk"
 
---> FOAM FATAL ERROR: 
-Cannot find file "points" in directory "polyMesh" in times 0 down to constant
+Doing:"faceSet liquidToLithiumInterfaceZone new patchToFace liquidToLithiumInterface"
+    Set:liquidToLithiumInterfaceZone  Size:0  Action:new
+    Adding all faces of patch liquidToLithiumInterface ...
+    Found matching patch liquidToLithiumInterface with 2000 faces.
+    Writing liquidToLithiumInterfaceZone (size 2000) to "constant/polyMesh/sets/liquidToLithiumInterfaceZone" and to vtk file "VTK/liquidToLithiumInterfaceZone/liquidToLithiumInterfaceZone_1.vtk"
 
-    From function Time::findInstance(const fileName&, const word&, const IOobject::readOption, const word&)
-    in file db/Time/findInstance.C at line 198.
+Doing:"quit"
+Quitting ...
 
-FOAM exiting
+End
 

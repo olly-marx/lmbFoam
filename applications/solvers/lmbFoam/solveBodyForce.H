@@ -3,9 +3,14 @@
     sigmaE = alpha1*sigmaE1 + (scalar(1) - alpha1)*sigmaE2;
     sigmaE.correctBoundaryConditions();
     
-    solve(fvm::laplacian(sigmaE, Voltage)
-	//== fvc::div(U ^ Bext)
+    fvScalarMatrix VoltageEqn
+    (
+    	fvm::laplacian(Voltage)
+	== 
+	fvc::div(U ^ Bext)
     );
+
+    VoltageEqn.solve();
 
     // Currect density
     J =
