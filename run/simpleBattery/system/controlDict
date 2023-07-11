@@ -23,7 +23,7 @@ startTime       0;
 
 stopAt          endTime;
 
-endTime         500;
+endTime         5;
 
 deltaT          0.001;
 
@@ -31,7 +31,7 @@ deltaT          0.001;
 //writeInterval   0.01;
 
 writeControl timeStep;
-writeInterval 10;
+writeInterval 20;
 
 purgeWrite      0;
 

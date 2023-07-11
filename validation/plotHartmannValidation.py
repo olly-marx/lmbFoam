@@ -31,7 +31,7 @@ errorDataLmb = []
 errorDataMhd = []
 
 # loop over the files and store the data in the arrays, skip the first line
-for Ha in [1, 5, 20]:
+for Ha in [1,5,20]:
 
     # add the analytical solution
     # the analytical solution is calculated by first creating a mesh of y values
@@ -62,13 +62,13 @@ for Ha in [1, 5, 20]:
     if Ha == 1:
         plt.text(0.6, 0.5, thisLabel, horizontalalignment='left', verticalalignment='center')
     elif Ha == 5:
-        plt.text(0.82, 0.72, thisLabel, horizontalalignment='left', verticalalignment='center')
+        plt.text(0.7, 0.6, thisLabel, horizontalalignment='left', verticalalignment='center')
     elif Ha == 20:
-        plt.text(0.97, 0.9, thisLabel, horizontalalignment='left', verticalalignment='center')
+        plt.text(0.85, 0.7, thisLabel, horizontalalignment='left', verticalalignment='center')
 
 
     for solver in ["mhdFoam", "lmbFoam"]:
-        for NCells in [20, 40, 80, 160]:
+        for NCells in [10, 20, 40, 80, 160]:
             file = "hartmann_" + solver + "_Ha" + str(Ha) + "_NCells" + str(NCells) + ".csv"
 
             data = np.genfromtxt(file, delimiter=',', skip_header=1)
@@ -99,11 +99,11 @@ for Ha in [1, 5, 20]:
                 col = colors[colorindex+1]
 
             # Define functions to calculate the L1 and L2 norms
-            def l1_norm(error, NCells):
-                return np.sum(np.abs(error))/NCells
+            def l1_norm(error):
+                return np.sum(np.abs(error))
 
-            def l2_norm(error, NCells):
-                return np.sqrt(np.sum(error**2)/NCells)
+            def l2_norm(error):
+                return np.sqrt(np.sum(error**2))
 
             # Calculate the L2 norm of the error between the analytical solution and the numerical solution
             # first interpolate the analytical solution to the y values of the numerical solution
@@ -112,8 +112,8 @@ for Ha in [1, 5, 20]:
             error = Ux[-1] - UxAnalyticalInterp
 
             # Calculate the L2 norm of the error between the analytical solution and the numerical solution
-            L1norm = l1_norm(error, NCells)
-            L2norm = l2_norm(error, NCells)
+            L1norm = l1_norm(error)
+            L2norm = l2_norm(error)
 
             # Print Solver, NCells, Ha, L1 norm and L2 norm
             print(solver + ", Res:" + str(NCells) + ", Ha:" + str(Ha) \
@@ -132,7 +132,7 @@ for Ha in [1, 5, 20]:
                 thisLabel = file.split("_")[1] + " ($Ha=$" + \
                         file.split("_")[2].split(".")[0].replace("Ha","") + ")"
                 plt.plot(Ux[-1], y[-1], color=col, label=thisLabel, marker=mark, \
-                        fillstyle='none', markersize=3, linestyle='none')
+                        markevery=10, fillstyle='none', markersize=3, linestyle='none')
 
 # add the legend, where the analytical solution not included
 plt.legend()
@@ -157,7 +157,11 @@ plt.clf()
 # Now, on the same set of axes plot the L1 and L2 norm for each solver and with NCells
 # as the x axis. Do so for each Ha value, save the plot as a pdf
 
-for Ha in [20]:
+# First, sort the data by Ha value
+errorDataMhd = sorted(errorDataMhd, key=lambda x: x[0])
+errorDataLmb = sorted(errorDataLmb, key=lambda x: x[0])
+
+for Ha in [1,5, 20]:
     # create a list of the L1 and L2 norms for this Ha value, for each solver
     L1normsMhd = []
     L2normsMhd = []
@@ -177,46 +181,21 @@ for Ha in [20]:
     # Make the x axis a numpy array
     NCells = np.array(NCells)
 
-    # Now calculate reference lines for the L1 and L2 norms
-    # The slopes should be -1 and -2 in the log-log plot
-    # The reference values are set such that the reference lines are not obscured
-    # by the data points
-    FirstOrderSlope = -1
-    SecondOrderSlope = -2
-
-    # calculate the reference values
-    FirstOrderRef = 0.001
-    SecondOrderRef = 0.01
-    
-    # calculate the reference lines such that the value for nCells = 20 is FirstOrderRef
-    # and the value for nCells = 20 is SecondOrderRef
-    FirstOrderLine = FirstOrderRef*(NCells/20)**FirstOrderSlope
-    SecondOrderLine = SecondOrderRef*(NCells/20)**SecondOrderSlope
-    
-
-    # plot the reference lines
-    plt.plot(NCells, FirstOrderLine, color='k', linestyle=':')
-    plt.plot(NCells, SecondOrderLine, color='k', linestyle=':')
-
-    # place a label on the plot next to the reference lines
-    plt.text(0.09, 0.66, r'$\mathcal{O}(2^{nd})$', fontsize=12, transform=plt.gca().transAxes)
-    plt.text(0.09, 0.33, r'$\mathcal{O}(1^{st})$', fontsize=12, transform=plt.gca().transAxes)
-
-    # scale the x and y axes logarithmically
-    plt.xscale('log')
-    plt.yscale('log')
+    # Now plot y=-x and y=-2x as reference lines
+    plt.plot(NCells, -NCells, color='black', linestyle='-', linewidth=1)
+    plt.plot(NCells, -2*NCells, color='black', linestyle='-', linewidth=1)
 
     # plot the L1 norm
     plt.plot(NCells, L1normsMhd, color=colors[0], linestyle='-', marker='o', \
-            fillstyle='none', markersize=3, label=r'$L_1$ (mhdFoam)')
+            markevery=10, fillstyle='none', markersize=3, label=r'$L_1$ (mhdFoam)')
     plt.plot(NCells, L1normsLmb, color=colors[1], linestyle='-', marker='o', \
-            fillstyle='none', markersize=3, label=r'$L_1$ (lmbFoam)')
+            markevery=10, fillstyle='none', markersize=3, label=r'$L_1$ (lmbFoam)')
 
     # plot the L2 norm
     plt.plot(NCells, L2normsMhd, color=colors[2], linestyle='--', marker='o', \
-            fillstyle='none', markersize=3, label=r'$L_2$ (mhdFoam)')
+            markevery=10, fillstyle='none', markersize=3, label=r'$L_2$ (mhdFoam)')
     plt.plot(NCells, L2normsLmb, color=colors[3], linestyle='--', marker='o', \
-            fillstyle='none', markersize=3, label=r'$L_2$ (lmbFoam)')
+            markevery=10, fillstyle='none', markersize=3, label=r'$L_2$ (lmbFoam)')
 
     # add the legend
     plt.legend()
@@ -224,10 +203,6 @@ for Ha in [20]:
     # add the axis labels
     plt.xlabel(r'$N_{cells}$')
     plt.ylabel(r'$L_1$ and $L_2$ norms')
-
-    # set the axis limits
-    plt.xlim([10,300])
-    plt.ylim([1e-4,1e-1])
 
     # save the figure as a pdf, high resolution
     plt.savefig("hartmannValidationL1L2_Ha" + str(Ha) + ".pdf", dpi=300, bbox_inches='tight')

@@ -16,10 +16,3 @@ runApplication -l log.setSet-solid setSet -region solid -batch setSet-solid.batc
 runApplication -l log.setsToZones-solid setsToZones -region solid
 
 runApplication $application
-
-## run in parallel, output to log file
-#decomposePar
-#mpirun -np 6 $application -parallel > log.$application
-#
-## reconstruct
-#reconstructPar

@@ -62,7 +62,7 @@ solvers
         preconditioner    Cholesky;
         minIter           0;
         maxIter           1000;
-        tolerance         1e-6;
+        tolerance         1e-8;
         relTol            0.0;
     }
 }
@@ -86,7 +86,7 @@ relaxationFactors
     {
         U 1; // 0.8
         UFinal 1;
-        Voltage 0.9;
+        // Voltage 0.999;
     }
     fields
     {
