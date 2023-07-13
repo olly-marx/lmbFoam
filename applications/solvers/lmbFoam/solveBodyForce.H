@@ -4,7 +4,6 @@
     sigmaE.correctBoundaryConditions();
     
     solve(fvm::laplacian(sigmaE, Voltage)
-	//== fvc::div(U ^ Bext)
     );
 
     // Currect density

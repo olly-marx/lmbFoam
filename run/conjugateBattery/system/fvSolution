@@ -65,6 +65,15 @@ solvers
         tolerance         1e-4;
         relTol            0.0;
     }
+    inducedVoltage_solidInducedVoltage
+    {
+        solver            CG;
+        preconditioner    Cholesky;
+        minIter           0;
+        maxIter           1000;
+        tolerance         1e-4;
+        relTol            0.0;
+    }
 }
 
 PISO

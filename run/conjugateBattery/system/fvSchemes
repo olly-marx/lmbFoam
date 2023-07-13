@@ -35,7 +35,7 @@ divSchemes
     div(((rho*nuEff)*dev2(T(grad(U))))) Gauss linear;
     div(phi,k) Gauss upwind;
     div(phi,epsilon) Gauss upwind;
-    div((U^Bext)) Gauss linear;
+    div((conductivity*(U^Bext))) Gauss linear;
 }
 
 laplacianSchemes
@@ -48,7 +48,8 @@ laplacianSchemes
     laplacian(DkEff,k) Gauss linear corrected;
 
     laplacian(conductivity,Voltage) Gauss linear corrected;
-    laplacian(Voltage) Gauss linear corrected;
+
+    laplacian(conductivity,inducedVoltage) Gauss linear corrected;
 }
 
 interpolationSchemes

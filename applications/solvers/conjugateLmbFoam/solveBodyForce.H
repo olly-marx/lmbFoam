@@ -1,5 +1,5 @@
 {
-    // Solve electric field equation
+    // Solve electric field equation for the constant applied voltage
     conductivity = alpha1*conductivity1 + (scalar(1) - alpha1)*conductivity2;
     conductivity.correctBoundaryConditions();
     solidConductivity.correctBoundaryConditions();
@@ -13,8 +13,6 @@
             new fvScalarMatrix
             (
                 fvm::laplacian(conductivity,Voltage)
-		//==
-		//fvc::div(U ^ Bext)
             );
 
         VoltageEqn->relax();
@@ -36,27 +34,71 @@
 
         VoltageEqns.solve();
     }
-        
 
-    // Currect density
-    currentDensity = 
+    // Calculate constant current density
+    J0 = 
 	    conductivity*
 	    (
 	    - fvc::grad(Voltage)
-	    + (U ^ Bext)
 	    );
-    currentDensity.correctBoundaryConditions();
+    J0.correctBoundaryConditions();
 
-    solidCurrentDensity = 
+    solidJ0 = 
 	    solidConductivity*
 	    (
 	    - fvc::grad(solidVoltage)
 	    );
-    solidCurrentDensity.correctBoundaryConditions();
+    solidJ0.correctBoundaryConditions();
+
+    while (simpleSolid.correctNonOrthogonal())
+    {
+        coupledFvScalarMatrix inducedVoltageEqns(2);
+
+        // Fluid side
+        fvScalarMatrix* inducedVoltageEqn =
+            new fvScalarMatrix
+            (
+		fvm::laplacian(conductivity,inducedVoltage)
+		//== fvc::div(conductivity*(U ^ Bext))
+            );
+
+        inducedVoltageEqn->relax();
+
+        // Solid side
+        fvScalarMatrix* solidInducedVoltageEqn =
+            new fvScalarMatrix
+            (
+                fvm::laplacian(solidConductivity, solidInducedVoltage)
+            );
+
+        solidInducedVoltageEqn->relax();
+
+        // Add fluid equation
+        inducedVoltageEqns.set(0, inducedVoltageEqn);
+
+        // Add solid equation
+        inducedVoltageEqns.set(1, solidInducedVoltageEqn);
+
+        //inducedVoltageEqns.solve();
+    }
+
+    // Calculate induced current density
+    j = 
+	    conductivity*
+	    (
+	    - fvc::grad(inducedVoltage)
+	    + (U ^ Bext)
+	    );
+    j.correctBoundaryConditions();
+
+    // The overall current density is the sum of the two
+    J = ( J0 
+	+ j
+	);
     
     // Electric current field
     bodyForce = 
-	    (currentDensity ^ Bext)
+	    (J ^ Bext)
 	    /(alpha1*rho1 + (1 - alpha1)*rho2);
     bodyForce.correctBoundaryConditions();
 }

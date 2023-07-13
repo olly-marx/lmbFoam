@@ -12,7 +12,20 @@
         mesh
     );
 
-    // Read external magnetic field
+    Info<< "Reading field inducedVoltage\n" << endl;
+    volScalarField inducedVoltage
+    (
+	IOobject
+	(
+	    "inducedVoltage",
+	    runTime.timeName(),
+	    mesh,
+	    IOobject::MUST_READ,
+	    IOobject::AUTO_WRITE
+	),
+	mesh
+    );
+
     volVectorField Bext
     (
         IOobject
@@ -42,11 +55,49 @@
     conductivity = alpha1*conductivity1 + (scalar(1) - alpha1)*conductivity2;
 
     // Note: mesh detached.  Do not evaluate current density
-    volVectorField currentDensity
+    volVectorField J0
     (
         IOobject
         (
-            "currentDensity",
+            "J0",
+            runTime.timeName(),
+            mesh,
+            IOobject::NO_READ,
+            IOobject::AUTO_WRITE
+        ),
+        mesh,
+        dimensionedVector
+        (
+            "zero",
+            dimensionSet(0, -2, 0, 0, 0, 1, 0),
+            vector::zero
+        )
+    );
+
+    volVectorField j
+    (
+        IOobject
+        (
+            "j",
+            runTime.timeName(),
+            mesh,
+            IOobject::NO_READ,
+            IOobject::AUTO_WRITE
+        ),
+        mesh,
+        dimensionedVector
+        (
+            "zero",
+            dimensionSet(0, -2, 0, 0, 0, 1, 0),
+            vector::zero
+        )
+    );
+
+    volVectorField J
+    (
+        IOobject
+        (
+            "J",
             runTime.timeName(),
             mesh,
             IOobject::NO_READ,
