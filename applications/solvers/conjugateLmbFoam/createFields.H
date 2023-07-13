@@ -61,14 +61,6 @@
     (
      	twoPhaseProperties.subDict("phase2").lookup("nu")
     );
-    dimensionedScalar mu1
-    (
-     	twoPhaseProperties.subDict("phase1").lookup("mu")
-    );
-    dimensionedScalar mu2
-    (
-     	twoPhaseProperties.subDict("phase2").lookup("mu")
-    );
     dimensionedScalar conductivity1
     (
      	twoPhaseProperties.subDict("phase1").lookup("conductivity")
@@ -77,7 +69,7 @@
     (
      	twoPhaseProperties.subDict("phase2").lookup("conductivity")
     );
-    dimensionedScalar sigma_ST
+    dimensionedScalar sigma
     (
      	twoPhaseProperties.lookup("sigma")
     );
