@@ -128,6 +128,40 @@ int main(int argc, char *argv[])
             // Update free surface
 #           include "alphaEqn.H"
 
+	    // Check the lithium interface boundary patch for contact with the
+	    // lower electrode, this occurs when the alpha field is greater than
+	    // 0.5. In this case end the simulation.
+	    label patchi = mesh.boundaryMesh().findPatchID("lithiumInterface");
+	    if(patchi >= 0)
+	    {
+		    scalarField alphaLithiumInterface = alpha1.boundaryField()[patchi];
+
+	    scalar alphaMax = gMax(alphaLithiumInterface);
+	    Info<< "alphaMax = " << alphaMax << endl;
+
+		    if(alphaMax > 0.4)
+		    {
+			Info<< "FATAL CONDITION: SHORT CIRCUIT DETECTED" << endl;
+
+			Info<< "ExecutionTime = " << runTime.elapsedCpuTime() << " s"
+			    << "  ClockTime = " << runTime.elapsedClockTime() << " s"
+			    << nl << "End\n" << endl;
+			// Write data and then exit
+			Info<< "Writing data at time " << runTime.timeName() << endl;
+			alpha1.write();
+			U.write();
+			bodyForce.write();
+			J.write();
+			exit(0);
+		    }
+		    else if(alphaMax > 1.0e-10)
+		    {
+			Info<< "Nearing Short Circuit Condition" << nl 
+				<<"Writing data at time " << runTime.timeName() << endl;
+			alpha1.write();
+		    }
+	    }
+
             turbulence->correct();
 
         }

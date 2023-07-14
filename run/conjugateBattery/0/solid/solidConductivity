@@ -17,7 +17,7 @@ FoamFile
 
 dimensions      [-1 -3 3 0 0 2 0];
 
-internalField   uniform 1.37e6;
+internalField   uniform 1e6;
 
 boundaryField
 {
@@ -25,13 +25,13 @@ boundaryField
     {
         type            regionCoupling;
         remoteField     conductivity;
-        value           uniform 1.37e6;
+        value           uniform 1e6;
     }
     lithiumInterface
     {
         type            regionCoupling;
         remoteField     conductivity;
-        value           uniform 1.37e6;
+        value           uniform 1e6;
     }
     outsideSurface
     {

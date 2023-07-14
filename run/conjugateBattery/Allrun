@@ -15,4 +15,24 @@ runApplication -l log.blockMesh-solid blockMesh -region solid
 runApplication -l log.setSet-solid setSet -region solid -batch setSet-solid.batch
 runApplication -l log.setsToZones-solid setsToZones -region solid
 
-$application
+# Take arguments from the command line to see whether we should
+# run or not
+# -prepare: prepare case for running but don't run
+# -serial: run in serial
+# -parallel: run in parallel
+
+arg=$1
+if [ "$arg" = "-prepare" ]; then
+	exit 0
+elif [ "$arg" = "-serial" ]; then
+	#runApplication -l log.$application $application
+	$application
+	exit 0
+elif [ "$arg" = "-parallel" ]; then
+	decomposePar
+	decomposePar -region solid
+	mpirun -np 4 $application -parallel
+	reconstructPar
+	reconstructPar -region solid
+	exit 0
+fi

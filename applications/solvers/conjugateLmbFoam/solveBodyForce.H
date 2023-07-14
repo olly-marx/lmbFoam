@@ -35,7 +35,7 @@
         VoltageEqns.solve();
     }
 
-    // Calculate constant current density
+    // Calculate current density from the constant applied voltage
     J0 = 
 	    conductivity*
 	    (
@@ -50,17 +50,21 @@
 	    );
     solidJ0.correctBoundaryConditions();
 
+    // Solve electric field equation for the induced voltage
+
     while (simpleSolid.correctNonOrthogonal())
     {
         coupledFvScalarMatrix inducedVoltageEqns(2);
+
+	volScalarField DivUxB = (U & fvc::curl(Bext)) - (Bext & fvc::curl(U));
 
         // Fluid side
         fvScalarMatrix* inducedVoltageEqn =
             new fvScalarMatrix
             (
 		fvm::laplacian(conductivity,inducedVoltage)
-		//== fvc::div(conductivity*(U ^ Bext))
-            );
+		== conductivity*DivUxB
+	    );
 
         inducedVoltageEqn->relax();
 
@@ -79,7 +83,7 @@
         // Add solid equation
         inducedVoltageEqns.set(1, solidInducedVoltageEqn);
 
-        //inducedVoltageEqns.solve();
+        inducedVoltageEqns.solve();
     }
 
     // Calculate induced current density
