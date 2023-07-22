@@ -83,7 +83,7 @@
         // Add solid equation
         inducedVoltageEqns.set(1, solidInducedVoltageEqn);
 
-        inducedVoltageEqns.solve();
+        //inducedVoltageEqns.solve();
     }
 
     // Calculate induced current density

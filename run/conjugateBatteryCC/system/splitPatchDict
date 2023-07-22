@@ -1,0 +1,32 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:     3.2                                |
+|   \\  /    A nd           | Web:         http://www.foam-extend.org         |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      splitPatchDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+patchToSplitName    outsideSurface;
+
+newPatchName        outerAttachmentPoint;
+
+x1  0.073900;
+y1  0.073900;
+z1  0.042900;
+
+x2  0.080100;
+y2  0.080100;
+z2  0.049100;
+
+boundBoxes
+(
+    ($x1 $y1 $z1) ($x2 $y2 $z2)
+);
+// ************************************************************************* //

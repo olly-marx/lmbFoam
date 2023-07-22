@@ -1,0 +1,79 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:     5.0                                |
+|   \\  /    A nd           | Web:         http://www.foam-extend.org         |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       polyBoundaryMesh;
+    location    "constant/polyMesh";
+    object      boundary;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+7
+(
+    outsideSurface
+    {
+        type            patch;
+        nFaces          24757;
+        startFace       394515;
+    }
+    lithiumInterface
+    {
+        type            regionCouple;
+        nFaces          6720;
+        startFace       419272;
+        shadowRegion    region0;
+        shadowPatch     liquidToLithiumInterface;
+        zone            lithiumInterfaceZone;
+        attached        off;
+        master          off;
+        isWall          off;
+        bridgeOverlap   off;
+    }
+    steelInterface
+    {
+        type            regionCouple;
+        nFaces          20625;
+        startFace       425992;
+        shadowRegion    region0;
+        shadowPatch     liquidToSteelInterface;
+        zone            steelInterfaceZone;
+        attached        off;
+        master          off;
+        isWall          off;
+        bridgeOverlap   off;
+    }
+    topLithium
+    {
+        type            patch;
+        nFaces          3120;
+        startFace       446617;
+    }
+    topSurface
+    {
+        type            patch;
+        nFaces          1264;
+        startFace       449737;
+    }
+    outerAttachmentPoint
+    {
+        type            patch;
+        nFaces          60;
+        startFace       451001;
+    }
+    topAttachmentPoint
+    {
+        type            patch;
+        nFaces          16;
+        startFace       451061;
+    }
+)
+
+
+// ************************************************************************* //

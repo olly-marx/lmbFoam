@@ -32,7 +32,7 @@ boundaryField
     }
     topSurface
     {
-        type            pressureInletOutletVelocity;
+        type            fixedValue;
         value           uniform (0 0 0);
     }
 }

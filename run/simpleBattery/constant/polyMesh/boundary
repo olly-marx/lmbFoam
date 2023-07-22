@@ -20,29 +20,29 @@ FoamFile
     sideWalls
     {
         type            wall;
-        nFaces          6000;
-        startFace       186000;
+        nFaces          3000;
+        startFace       50892;
         closedSolidBodyMotion false;
     }
     bottomWall
     {
         type            wall;
-        nFaces          2400;
-        startFace       192000;
+        nFaces          900;
+        startFace       53892;
         closedSolidBodyMotion false;
     }
     lithiumInterface
     {
         type            wall;
-        nFaces          2000;
-        startFace       194400;
+        nFaces          1344;
+        startFace       54792;
         closedSolidBodyMotion false;
     }
     topSurface
     {
         type            patch;
-        nFaces          1600;
-        startFace       196400;
+        nFaces          324;
+        startFace       56136;
     }
 )
 

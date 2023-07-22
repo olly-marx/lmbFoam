@@ -67,8 +67,15 @@
             IOobject::NO_READ,
             IOobject::AUTO_WRITE
         ),
-        (J ^ Bext)/
-        (alpha1*rho1 + (1 - alpha1)*rho2)
+	mesh,
+        dimensionedVector
+        (
+            "zero",
+            dimensionSet(0, 1, -2, 0, 0, 0, 0),
+            vector::zero
+        )
+        //(J ^ Bext)/
+        //(alpha1*rho1 + (1 - alpha1)*rho2)
     );
 
 

@@ -18,7 +18,7 @@ FoamFile
 defaultFieldValues
 (
     volScalarFieldValue alpha1 0
-    volScalarFieldValue conductivity 288
+    //volScalarFieldValue conductivity 187.1
 );
 
 // Variable to store the height of the electrolyte layer
@@ -32,7 +32,7 @@ regions
         fieldValues
         (
             volScalarFieldValue alpha1 1
-            volScalarFieldValue conductivity 768000
+            //volScalarFieldValue conductivity 781000
         );
     }
 );

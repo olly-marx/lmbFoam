@@ -14,7 +14,7 @@
       - fvm::laplacian(nuEff, U)
       - (fvc::grad(U) & fvc::grad(nuEff))
      ==
-        alpha1*bodyForce
+        bodyForce
     );
 
     UEqn.relax

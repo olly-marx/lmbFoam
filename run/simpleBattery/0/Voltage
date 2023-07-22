@@ -16,25 +16,26 @@ FoamFile
 
 dimensions      [1 2 -3 0 0 -1 0];
 
-VCell -0.4;
-
 internalField   uniform 0;
 
 boundaryField
 {
     sideWalls
     {
+        //type            zeroGradient;
         type            fixedValue;
         value           uniform 0;
     }
     bottomWall
     {
+        //type            fixedValue;
+        //value           uniform 0;
         type            zeroGradient;
     }
     lithiumInterface
     {
         type            fixedValue;
-        value           uniform $VCell; // Fedor - potential difference across bismuth
+        value           uniform -0.03; // Fedor - potential difference across bismuth
     }
     topSurface
     {

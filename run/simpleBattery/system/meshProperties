@@ -1,0 +1,31 @@
+// Mesh properties as set by setMeshProperties.py
+
+x1 -75;  // "-0.5 * sqrt($xyArea / $xyRatio)"
+x2 75;   // "0.5 * sqrt($xyArea / $xyRatio)"
+y1 -75; // "$x1 * $xyRatio";
+y2 75;  // "$x2 * $xyRatio";
+z1 0;
+z2 50;
+
+x3 -60; // "$x1*0.68376068"
+x4 60; // "$x2*0.68376068"
+y3 -60; // "$y1*0.68376068"
+y4 60; // "$y2*0.68376068"
+z3 34;
+z4 50;
+
+deltax 5;
+deltay 5;
+deltaz 2.0;
+
+xLen1 150; // "$x2 - $x1"
+yLen1 150; // "$y2 - $y1"
+xLen2 120; // "$x4 - $x3"
+yLen2 120; // "$y4 - $y3"
+
+xC1 24; // "$xLen2/$deltax"
+xC2 3; // "($xLen1-$xLen2)/$deltax"
+yC1 24; // "$yLen2/$deltay"
+yC2 3; // "($yLen1-$yLen2)/$deltay"
+zC1 17; // "$zLen1/$deltaz"
+zC2 8; // "$zLen2/$deltaz"

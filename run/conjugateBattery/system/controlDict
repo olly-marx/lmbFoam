@@ -23,15 +23,15 @@ startTime       0;
 
 stopAt          endTime;
 
-endTime         10;
+endTime         0.01;
 
 deltaT          0.001;
 
 // writeControl    adjustableRunTime;
-// writeInterval   0.01;
+// writeInterval   0.1;
 
 writeControl timeStep;
-writeInterval 50;
+writeInterval 1;
 
 purgeWrite      0;
 
@@ -49,9 +49,9 @@ runTimeModifiable yes;
 
 adjustTimeStep  yes;
 
-maxCo           0.25;
+maxCo           0.8;
 
-maxAlphaCo      0.25;
+maxAlphaCo      0.8;
 
 maxDeltaT       0.01;
 
@@ -119,6 +119,26 @@ functions
         region solid;
         functionObjectLibs ("libfieldFunctionObjects.so");
         name solidVoltage;
+    }
+    /*
+    minMaxInducedVoltage
+    {
+	type minMaxField;
+	functionObjectLibs ("libfieldFunctionObjects.so");
+	name inducedVoltage;
+    }
+    */
+    minMaxCurrent
+    {
+	type minMaxField;
+	functionObjectLibs ("libfieldFunctionObjects.so");
+	name J;
+    }
+    minMaxBodyForce
+    {
+	type minMaxField;
+	functionObjectLibs ("libfieldFunctionObjects.so");
+	name bodyForce;
     }
 );
 

@@ -40,7 +40,8 @@ phase2
 // Interfacial tension between the two phases
 // Surface tension of Pb-Bi (0.43848 N/m)
 // Surface tension of LiCl-KCl (0.12976 N/m)
-sigma            sigma [ 1 0 -2 0 0 0 0 ] 0.56825; //surface tension
+sigma            sigma [ 1 0 -2 0 0 0 0 ] 0.39; //surface tension
+					          // Should be 0.2343, broken
 
 curvatureModel
 {

@@ -1,0 +1,145 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:     5.0                                |
+|   \\  /    A nd           | Web:         http://www.foam-extend.org         |
+|    \\/     M anipulation  | For copyright notice see file Copyright         |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     lmbFoam;
+
+startFrom       startTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         0.001;
+
+deltaT          0.001;
+
+// writeControl    adjustableRunTime;
+// writeInterval   0.1;
+
+writeControl timeStep;
+writeInterval 1;
+
+purgeWrite      0;
+
+writeFormat     ascii;
+
+writePrecision  8;
+
+writeCompression on;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable yes;
+
+adjustTimeStep  yes;
+
+maxCo           0.8;
+
+maxAlphaCo      0.8;
+
+maxDeltaT       0.01;
+
+libs
+(
+   "libforces.so"
+);
+
+functions
+(
+    friction
+    {
+        patches (liquidToSteelInterface liquidToLithiumInterface);
+        CofR (0 0 0);
+        writeControl timeStep;
+        writeInterval 1;
+        // Field names
+        p           pd;
+        U           U;
+        rho         rhoInf;
+        rhoInf       8900;
+
+        type           forces;
+        log             true;
+    }
+    minMaxPd
+    {
+        type minMaxField;
+        functionObjectLibs ("libfieldFunctionObjects.so");
+        name pd;
+    }
+    minMaxU
+    {
+        type minMaxField;
+        functionObjectLibs ("libfieldFunctionObjects.so");
+        name U;
+    }
+    minMaxAlpha1
+    {
+        type minMaxField;
+        functionObjectLibs ("libfieldFunctionObjects.so");
+        name alpha1;
+    }
+    minMaxK
+    {
+        type minMaxField;
+        functionObjectLibs ("libfieldFunctionObjects.so");
+        name k;
+    }
+    minMaxNuT
+    {
+        type minMaxField;
+        functionObjectLibs ("libfieldFunctionObjects.so");
+        name nut;
+    }
+    minMaxVoltage
+    {
+        type minMaxField;
+        functionObjectLibs ("libfieldFunctionObjects.so");
+        name pd;
+    }
+    minMaxSolidVoltage
+    {
+        type minMaxField;
+        region solid;
+        functionObjectLibs ("libfieldFunctionObjects.so");
+        name solidVoltage;
+    }
+    /*
+    minMaxInducedVoltage
+    {
+	type minMaxField;
+	functionObjectLibs ("libfieldFunctionObjects.so");
+	name inducedVoltage;
+    }
+    */
+    minMaxCurrent
+    {
+	type minMaxField;
+	functionObjectLibs ("libfieldFunctionObjects.so");
+	name J;
+    }
+    minMaxBodyForce
+    {
+	type minMaxField;
+	functionObjectLibs ("libfieldFunctionObjects.so");
+	name bodyForce;
+    }
+);
+
+// ************************************************************************* //

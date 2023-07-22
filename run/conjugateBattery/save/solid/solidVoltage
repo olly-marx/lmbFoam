@@ -44,7 +44,7 @@ boundaryField
     topLithium
     {
         type            fixedValue;
-        value           uniform -0.7;
+        value           uniform -0.007;
     }
 }
 
