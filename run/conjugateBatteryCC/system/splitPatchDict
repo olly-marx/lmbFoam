@@ -17,13 +17,13 @@ patchToSplitName    outsideSurface;
 
 newPatchName        outerAttachmentPoint;
 
-x1  0.073900;
-y1  0.073900;
-z1  0.042900;
+x1  -0.003100;
+y1  -0.003100;
+z1  -0.005100;
 
-x2  0.080100;
-y2  0.080100;
-z2  0.049100;
+x2  0.003100;
+y2  0.003100;
+z2  0.001100;
 
 boundBoxes
 (

@@ -866,11 +866,15 @@ conjugateLmbFoam.dep: ../../../src/atomization/lnInclude/alphaCourantNo.H
 conjugateLmbFoam.dep: ../../../src/atomization/lnInclude/setAlphaDeltaT.H
 conjugateLmbFoam.dep: detachPatches.H
 conjugateLmbFoam.dep: attachPatches.H
-conjugateLmbFoam.dep: solveBodyForce.H
 conjugateLmbFoam.dep: correctMeshMotion.H
 conjugateLmbFoam.dep: $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/volContinuity.H
 conjugateLmbFoam.dep: $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/meshCourantNo.H
 conjugateLmbFoam.dep: correctPhi.H
+conjugateLmbFoam.dep: UEqn.H
+conjugateLmbFoam.dep: pdEqn.H
+conjugateLmbFoam.dep: $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/movingMeshContinuityErrs.H
+conjugateLmbFoam.dep: $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/continuityErrs.H
+conjugateLmbFoam.dep: alphaEqn.H
 $(OBJECTS_DIR)/conjugateLmbFoam.o: $(EXE_DEP)
 $(OBJECTS_DIR)/conjugateLmbFoam.o:
 	@SOURCE_DIR=.

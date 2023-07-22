@@ -30,7 +30,7 @@ else:
 meshPropertiesFile = "./system/meshProperties"
 
 # Set the number of cells in the x, y, and z directions
-N = 75
+N = 30
 
 if highRes: Nx = 2*N; Ny = 2*N; Nz = 100
 else: Nx = N; Ny = N; Nz = 50

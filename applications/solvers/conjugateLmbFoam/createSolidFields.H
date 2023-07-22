@@ -12,19 +12,19 @@
         solidMesh
     );
 
-    Info<< "Reading field solidInducedVoltage\n" << endl;
-    volScalarField solidInducedVoltage
-    (
-        IOobject
-        (
-            "solidInducedVoltage",
-            runTime.timeName(),
-            solidMesh,
-            IOobject::MUST_READ,
-            IOobject::AUTO_WRITE
-        ),
-        solidMesh
-    );
+    //Info<< "Reading field solidInducedVoltage\n" << endl;
+    //volScalarField solidInducedVoltage
+    //(
+    //    IOobject
+    //    (
+    //        "solidInducedVoltage",
+    //        runTime.timeName(),
+    //        solidMesh,
+    //        IOobject::MUST_READ,
+    //        IOobject::AUTO_WRITE
+    //    ),
+    //    solidMesh
+    //);
 
     Info<< "Reading field solidConductivity\n" << endl;
     volScalarField solidConductivity

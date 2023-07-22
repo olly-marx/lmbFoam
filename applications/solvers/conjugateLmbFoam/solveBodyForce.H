@@ -50,41 +50,49 @@
 	    );
     solidJ0.correctBoundaryConditions();
 
-    // Solve electric field equation for the induced voltage
+    // Solve electric field equation for the induced voltage in the fluid
 
-    while (simpleSolid.correctNonOrthogonal())
-    {
-        coupledFvScalarMatrix inducedVoltageEqns(2);
+    //while (simpleSolid.correctNonOrthogonal())
+    //{
+    //    coupledFvScalarMatrix inducedVoltageEqns(2);
 
-	volScalarField DivUxB = (U & fvc::curl(Bext)) - (Bext & fvc::curl(U));
+    //    volScalarField DivUxB = (U & fvc::curl(Bext)) - (Bext & fvc::curl(U));
 
-        // Fluid side
-        fvScalarMatrix* inducedVoltageEqn =
-            new fvScalarMatrix
-            (
-		fvm::laplacian(conductivity,inducedVoltage)
-		== conductivity*DivUxB
-	    );
+    //    // Fluid side
+    //    fvScalarMatrix* inducedVoltageEqn =
+    //        new fvScalarMatrix
+    //        (
+    //    	fvm::laplacian(conductivity,inducedVoltage)
+    //    	== conductivity*DivUxB
+    //        );
 
-        inducedVoltageEqn->relax();
+    //    inducedVoltageEqn->relax();
 
-        // Solid side
-        fvScalarMatrix* solidInducedVoltageEqn =
-            new fvScalarMatrix
-            (
-                fvm::laplacian(solidConductivity, solidInducedVoltage)
-            );
+    //    // Solid side
+    //    fvScalarMatrix* solidInducedVoltageEqn =
+    //        new fvScalarMatrix
+    //        (
+    //            fvm::laplacian(solidConductivity, solidInducedVoltage)
+    //        );
 
-        solidInducedVoltageEqn->relax();
+    //    solidInducedVoltageEqn->relax();
 
-        // Add fluid equation
-        inducedVoltageEqns.set(0, inducedVoltageEqn);
+    //    // Add fluid equation
+    //    inducedVoltageEqns.set(0, inducedVoltageEqn);
 
-        // Add solid equation
-        inducedVoltageEqns.set(1, solidInducedVoltageEqn);
+    //    // Add solid equation
+    //    inducedVoltageEqns.set(1, solidInducedVoltageEqn);
 
-        //inducedVoltageEqns.solve();
-    }
+    //    //inducedVoltageEqns.solve();
+    //}
+
+    volScalarField DivUxB = (U & fvc::curl(Bext)) - (Bext & fvc::curl(U));
+    
+    // Fluid side
+    solve(
+        fvm::laplacian(conductivity,inducedVoltage)
+        == conductivity*DivUxB
+    );
 
     // Calculate induced current density
     j = 

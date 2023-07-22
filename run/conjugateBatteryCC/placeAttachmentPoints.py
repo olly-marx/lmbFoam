@@ -21,8 +21,8 @@ else:
     sys.exit()
 
 # The dx, dy, dz are constants and will be set by another script
-dx =  2.000000
-dy =  2.000000
+dx =  5.000000
+dy =  5.000000
 dz =  1.000000
 
 # Reset dx, dy, dz in based on N, and based on the value of z

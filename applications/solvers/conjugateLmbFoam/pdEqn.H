@@ -80,10 +80,10 @@
     // Pressure underrelaxation forbidden because of the jump conditions.
     // VV, 1/Apr/2015
 
-    U += rAU*fvc::reconstruct((phi - phiU)/rAUf);
-
     // Make the fluxes relative
     fvc::makeRelative(phi, U);
+
+    U += rAU*fvc::reconstruct((phi - phiU)/rAUf);
 
     // Correct velocity boundary conditions with relative flux
     U.correctBoundaryConditions();

@@ -105,7 +105,7 @@ int main(int argc, char *argv[])
 #           include "attachPatches.H"
 
             // Solve current to determine the electromagnetic force
-#           include "solveBodyForce.H"
+//#           include "solveBodyForce.H"
 
             // Detach coupled patches
 #           include "detachPatches.H"
@@ -114,19 +114,19 @@ int main(int argc, char *argv[])
 #           include "correctMeshMotion.H"
 
             // Momentum predictor
-//#           include "UEqn.H"
+#           include "UEqn.H"
 
             // --- PISO loop
             while (pimple.correct())
             {
-//#               include "pdEqn.H"
+#               include "pdEqn.H"
             }
 
             // Update total pressure field
-//#           include "pEqn.H"
+#           include "pEqn.H"
 
             // Update free surface
-//#           include "alphaEqn.H"
+#           include "alphaEqn.H"
 
 	    // Check the lithium interface boundary patch for contact with the
 	    // lower electrode, this occurs when the alpha field is greater than
@@ -162,7 +162,7 @@ int main(int argc, char *argv[])
 	    //        }
 	    //}
 
-            //turbulence->correct();
+            turbulence->correct();
 
         }
 

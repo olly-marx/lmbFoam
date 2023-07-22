@@ -20,14 +20,14 @@ FoamFile
     outsideSurface
     {
         type            patch;
-        nFaces          24757;
-        startFace       394515;
+        nFaces          9648;
+        startFace       112424;
     }
     lithiumInterface
     {
         type            regionCouple;
-        nFaces          6720;
-        startFace       419272;
+        nFaces          1892;
+        startFace       122072;
         shadowRegion    region0;
         shadowPatch     liquidToLithiumInterface;
         zone            lithiumInterfaceZone;
@@ -39,8 +39,8 @@ FoamFile
     steelInterface
     {
         type            regionCouple;
-        nFaces          20625;
-        startFace       425992;
+        nFaces          6900;
+        startFace       123964;
         shadowRegion    region0;
         shadowPatch     liquidToSteelInterface;
         zone            steelInterfaceZone;
@@ -52,26 +52,26 @@ FoamFile
     topLithium
     {
         type            patch;
-        nFaces          3120;
-        startFace       446617;
+        nFaces          480;
+        startFace       130864;
     }
     topSurface
     {
         type            patch;
-        nFaces          1264;
-        startFace       449737;
+        nFaces          544;
+        startFace       131344;
     }
     outerAttachmentPoint
     {
         type            patch;
-        nFaces          60;
-        startFace       451001;
+        nFaces          4;
+        startFace       131888;
     }
     topAttachmentPoint
     {
         type            patch;
-        nFaces          16;
-        startFace       451061;
+        nFaces          4;
+        startFace       131892;
     }
 )
 

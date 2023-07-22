@@ -17,7 +17,7 @@ FoamFile
 
 solvers
 {
-    "p|pd|pdFinal"
+    "p|pd|pdFinal|inducedVoltage"
     {
         solver            amgSolver;
         cycle             V-cycle;
