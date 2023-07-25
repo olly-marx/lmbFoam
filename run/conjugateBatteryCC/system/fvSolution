@@ -74,6 +74,15 @@ solvers
         tolerance         1e-4;
         relTol            0.0;
     }
+    "(a|A0)"
+    {
+        solver            CG;
+        preconditioner    Cholesky;
+        minIter           0;
+        maxIter           1000;
+        tolerance         1e-4;
+        relTol            0.0;
+    }
 }
 
 PISO

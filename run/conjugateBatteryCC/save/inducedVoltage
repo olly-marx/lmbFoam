@@ -23,12 +23,12 @@ boundaryField
     liquidToSteelInterface
     {
         type            fixedValue;
-        value           uniform 0;
+	value           $internalField;
     }
     liquidToLithiumInterface
     {
         type            fixedValue;
-        value           uniform 0;
+	value           $internalField;
     }
     topSurface
     {

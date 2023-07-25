@@ -9,7 +9,10 @@ if [ "$out" = "-loud" ]; then
 	blockMesh
 	setSet -batch setSet-fluid.batch
 	setsToZones
-	setFields
+	setF=$3
+	if [ "$setF" = "-setFields" ]; then
+		setFields
+	fi
 
 	#solid
 	blockMesh -region solid
@@ -64,7 +67,10 @@ elif [ "$out" = "-quiet" ]; then
 	runApplication -l log.blockMesh-fluid blockMesh
 	runApplication -l log.setSet-fluid setSet -batch setSet-fluid.batch
 	runApplication -l log.setsToZones-fluid setsToZones
-	runApplication setFields
+	setF=$3
+	if [ "$setF" = "-setFields" ]; then
+		runApplication setFields
+	fi
 
 	#solid
 	runApplication -l log.blockMesh-solid blockMesh -region solid
@@ -98,6 +104,7 @@ elif [ "$out" = "-quiet" ]; then
 	elif [ "$arg" = "-parallel" ]; then
 		runApplication -l log.decomposePar-fluid decomposePar
 		runApplication -l log.decomposePar-solid decomposePar -region solid
+		echo "Running $application in parallel"
 		mpirun -np 8 $application -parallel > log.$application
 		tput bel
 		runApplication -l log.reconstructPar-fluid reconstructPar

@@ -55,6 +55,7 @@ Author
 #include "simpleControl.H"
 #include "dynamicFvMesh.H"
 #include "numericsFunctions.H"
+#include "fixedValueFvPatchFields.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
@@ -75,7 +76,7 @@ int main(int argc, char *argv[])
 #   include "createControls.H"
 #   include "createFields.H"
 #   include "createSolidFields.H"
-#   include "createBodyForce.H"
+#   include "createMHDFields.H"
 #   include "CourantNo.H"
 #   include "setInitialDeltaT.H"
 
@@ -90,6 +91,7 @@ int main(int argc, char *argv[])
 #       include "CourantNo.H"
 #       include "alphaCourantNo.H"
 #       include "setAlphaDeltaT.H"
+#       include "setVectorPotentialBCs.H"
 
         // Detach coupled patches
 #       include "detachPatches.H"
@@ -105,7 +107,7 @@ int main(int argc, char *argv[])
 #           include "attachPatches.H"
 
             // Solve current to determine the electromagnetic force
-//#           include "solveBodyForce.H"
+#           include "solveBodyForce.H"
 
             // Detach coupled patches
 #           include "detachPatches.H"

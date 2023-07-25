@@ -19592,7 +19592,7 @@
         <Domain name="bool" id="15725.DecomposePolyhedra.bool"/>
       </Property>
       <Property name="FileName" id="15725.FileName" number_of_elements="1">
-        <Element index="0" value="/home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/conjugateBattery/conjugateBattery.foam"/>
+        <Element index="0" value="/home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/conjugateBatteryCC/conjugateBatteryCC.foam"/>
         <Domain name="files" id="15725.FileName.files"/>
       </Property>
       <Property name="LagrangianArrayInfo" id="15725.LagrangianArrayInfo"/>
@@ -21544,19 +21544,19 @@
       <Item id="15737" name="RepresentationAnimationHelper"/>
     </ProxyCollection>
     <ProxyCollection name="pq_helper_proxies.16045">
-      <Item id="15824" name="DataAxesGrid" logname="conjugateBattery.foam(UnstructuredGridRepresentation)/DataAxesGrid/GridAxesRepresentation"/>
-      <Item id="15861" name="GlyphType" logname="conjugateBattery.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/ArrowSource"/>
-      <Item id="15872" name="GlyphType" logname="conjugateBattery.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/ConeSource"/>
-      <Item id="15883" name="GlyphType" logname="conjugateBattery.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/CubeSource"/>
-      <Item id="15894" name="GlyphType" logname="conjugateBattery.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/CylinderSource"/>
-      <Item id="15905" name="GlyphType" logname="conjugateBattery.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/LineSource"/>
-      <Item id="15916" name="GlyphType" logname="conjugateBattery.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/SphereSource"/>
-      <Item id="15927" name="GlyphType" logname="conjugateBattery.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/GlyphSource2D"/>
-      <Item id="15938" name="GlyphType" logname="conjugateBattery.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/PipelineConnection"/>
-      <Item id="16017" name="OSPRayScaleFunction" logname="conjugateBattery.foam(UnstructuredGridRepresentation)/SurfaceRepresentation/OSPRayScaleFunction/PiecewiseFunction"/>
-      <Item id="15971" name="OpacityTransferFunction" logname="conjugateBattery.foam(UnstructuredGridRepresentation)/PointGaussianRepresentation/OpacityTransferFunction/PiecewiseFunction"/>
-      <Item id="15839" name="PolarAxes" logname="conjugateBattery.foam(UnstructuredGridRepresentation)/PolarAxes/PolarAxesRepresentation"/>
-      <Item id="15972" name="ScaleTransferFunction" logname="conjugateBattery.foam(UnstructuredGridRepresentation)/PointGaussianRepresentation/ScaleTransferFunction/PiecewiseFunction"/>
+      <Item id="15824" name="DataAxesGrid" logname="conjugateBatteryCC.foam(UnstructuredGridRepresentation)/DataAxesGrid/GridAxesRepresentation"/>
+      <Item id="15861" name="GlyphType" logname="conjugateBatteryCC.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/ArrowSource"/>
+      <Item id="15872" name="GlyphType" logname="conjugateBatteryCC.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/ConeSource"/>
+      <Item id="15883" name="GlyphType" logname="conjugateBatteryCC.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/CubeSource"/>
+      <Item id="15894" name="GlyphType" logname="conjugateBatteryCC.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/CylinderSource"/>
+      <Item id="15905" name="GlyphType" logname="conjugateBatteryCC.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/LineSource"/>
+      <Item id="15916" name="GlyphType" logname="conjugateBatteryCC.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/SphereSource"/>
+      <Item id="15927" name="GlyphType" logname="conjugateBatteryCC.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/GlyphSource2D"/>
+      <Item id="15938" name="GlyphType" logname="conjugateBatteryCC.foam(UnstructuredGridRepresentation)/Glyph3DRepresentation/GlyphType/PipelineConnection"/>
+      <Item id="16017" name="OSPRayScaleFunction" logname="conjugateBatteryCC.foam(UnstructuredGridRepresentation)/SurfaceRepresentation/OSPRayScaleFunction/PiecewiseFunction"/>
+      <Item id="15971" name="OpacityTransferFunction" logname="conjugateBatteryCC.foam(UnstructuredGridRepresentation)/PointGaussianRepresentation/OpacityTransferFunction/PiecewiseFunction"/>
+      <Item id="15839" name="PolarAxes" logname="conjugateBatteryCC.foam(UnstructuredGridRepresentation)/PolarAxes/PolarAxesRepresentation"/>
+      <Item id="15972" name="ScaleTransferFunction" logname="conjugateBatteryCC.foam(UnstructuredGridRepresentation)/PointGaussianRepresentation/ScaleTransferFunction/PiecewiseFunction"/>
     </ProxyCollection>
     <ProxyCollection name="pq_helper_proxies.16085">
       <Item id="16096" name="RepresentationAnimationHelper"/>
@@ -21651,7 +21651,7 @@
     <ProxyCollection name="representations">
       <Item id="17773" name="GeometryRepresentation1" logname="PlotDataOverTime1(GeometryRepresentation)"/>
       <Item id="17548" name="QuartileChartRepresentation1" logname="PlotDataOverTime1(QuartileChartRepresentation)"/>
-      <Item id="16045" name="UnstructuredGridRepresentation1" logname="conjugateBattery.foam(UnstructuredGridRepresentation)"/>
+      <Item id="16045" name="UnstructuredGridRepresentation1" logname="conjugateBatteryCC.foam(UnstructuredGridRepresentation)"/>
       <Item id="16326" name="UnstructuredGridRepresentation2" logname="Threshold1(UnstructuredGridRepresentation)"/>
       <Item id="16588" name="UnstructuredGridRepresentation3" logname="Calculator1(UnstructuredGridRepresentation)"/>
       <Item id="16850" name="UnstructuredGridRepresentation4" logname="Threshold2(UnstructuredGridRepresentation)"/>
@@ -21672,7 +21672,7 @@
       <Item id="17523" name="PlotDataOverTime1" logname="PlotDataOverTime1"/>
       <Item id="16085" name="Threshold1" logname="Threshold1"/>
       <Item id="16609" name="Threshold2" logname="Threshold2"/>
-      <Item id="15725" name="conjugateBattery.foam" logname="conjugateBattery.foam"/>
+      <Item id="15725" name="conjugateBatteryCC.foam" logname="conjugateBatteryCC.foam"/>
     </ProxyCollection>
     <ProxyCollection name="timekeeper">
       <Item id="9889" name="TimeKeeper1"/>

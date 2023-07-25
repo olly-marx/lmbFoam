@@ -42,13 +42,12 @@ laplacianSchemes
     default none; //Gauss linear corrected;
     laplacian(nuEff,U) Gauss linear corrected;
     laplacian(rAU,pd) interfaceGauss linear interfaceCorrected;
-
     laplacian(DepsilonEff,epsilon) Gauss linear corrected;
     laplacian(DkEff,k) Gauss linear corrected;
-
     laplacian(conductivity,Voltage) Gauss linear corrected;
-
     laplacian(conductivity,inducedVoltage) Gauss linear corrected;
+    laplacian((1|(conductivity*mu)),a) Gauss linear corrected;
+    laplacian((1|(conductivity*mu)),A0) Gauss linear corrected;
 }
 
 interpolationSchemes

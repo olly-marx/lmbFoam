@@ -70,6 +70,11 @@
      	twoPhaseProperties.subDict("phase2").lookup("conductivity")
     );
 
+    dimensionedScalar mu
+    (
+     	twoPhaseProperties.lookup("mu")
+    );
+
     const dimensionedScalar& rho1 = twoPhaseProperties.rho1();
     const dimensionedScalar& rho2 = twoPhaseProperties.rho2();
 
