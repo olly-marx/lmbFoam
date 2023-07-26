@@ -1,0 +1,231 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:     5.0                                |
+|   \\  /    A nd           | Web:         http://www.foam-extend.org         |
+|    \\/     M anipulation  | For copyright notice see file Copyright         |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+scale   0.001;
+
+# include "../../system/meshProperties"
+
+vertices
+(
+    // Plane 1
+    ( $x1b  $y1b  $z1b ) // 0
+    ( $x1b  $y3b  $z1b )
+    ( $x1b  $y4b  $z1b )
+    ( $x1b  $y2b  $z1b )
+    ( $x3b  $y1b  $z1b )
+    ( $x3b  $y3b  $z1b )
+    ( $x3b  $y4b  $z1b )
+    ( $x3b  $y2b  $z1b )
+    ( $x4b  $y1b  $z1b )
+    ( $x4b  $y3b  $z1b )
+    ( $x4b  $y4b  $z1b )
+    ( $x4b  $y2b  $z1b )
+    ( $x2b  $y1b  $z1b )
+    ( $x2b  $y3b  $z1b )
+    ( $x2b  $y4b  $z1b )
+    ( $x2b  $y2b  $z1b )
+    // Plane 2
+    ( $x1b  $y1b  $z3b ) // 16
+    ( $x1b  $y3b  $z3b )
+    ( $x1b  $y4b  $z3b )
+    ( $x1b  $y2b  $z3b )
+    ( $x3b  $y1b  $z3b )
+    ( $x3b  $y3b  $z3b )
+    ( $x3b  $y4b  $z3b )
+    ( $x3b  $y2b  $z3b )
+    ( $x4b  $y1b  $z3b )
+    ( $x4b  $y3b  $z3b )
+    ( $x4b  $y4b  $z3b )
+    ( $x4b  $y2b  $z3b )
+    ( $x2b  $y1b  $z3b )
+    ( $x2b  $y3b  $z3b )
+    ( $x2b  $y4b  $z3b )
+    ( $x2b  $y2b  $z3b )
+    // Plane 3
+    ( $x1b  $y1b  $z2b ) // 32
+    ( $x1b  $y3b  $z2b )
+    ( $x1b  $y4b  $z2b )
+    ( $x1b  $y2b  $z2b )
+    ( $x3b  $y1b  $z2b )
+    ( $x3b  $y3b  $z2b )
+    ( $x3b  $y4b  $z2b )
+    ( $x3b  $y2b  $z2b )
+    ( $x4b  $y1b  $z2b )
+    ( $x4b  $y3b  $z2b )
+    ( $x4b  $y4b  $z2b )
+    ( $x4b  $y2b  $z2b )
+    ( $x2b  $y1b  $z2b )
+    ( $x2b  $y3b  $z2b )
+    ( $x2b  $y4b  $z2b )
+    ( $x2b  $y2b  $z2b )
+    // Lithium block
+    ( $x3   $y3   $z3  ) //48
+    ( $x3   $y4   $z3  )
+    ( $x4   $y3   $z3  )
+    ( $x4   $y4   $z3  )
+    ( $x3   $y3   $z4  )
+    ( $x3   $y4   $z4  )
+    ( $x4   $y3   $z4  )
+    ( $x4   $y4   $z4  )
+);
+
+blocks
+(
+    // Bottom blocks
+    hex ( 0  4  5  1 16 20 21 17) ( $xC2b $yC2b $zC2b ) simpleGrading (1 1 1)
+    hex ( 1  5  6  2 17 21 22 18) ( $xC2b $yC1b $zC2b ) simpleGrading (1 1 1) 
+    hex ( 2  6  7  3 18 22 23 19) ( $xC2b $yC2b $zC2b ) simpleGrading (1 1 1)
+    hex ( 4  8  9  5 20 24 25 21) ( $xC1b $yC2b $zC2b ) simpleGrading (1 1 1)
+    hex ( 5  9 10  6 21 25 26 22) ( $xC1b $yC1b $zC2b ) simpleGrading (1 1 1)
+    hex ( 6 10 11  7 22 26 27 23) ( $xC1b $yC2b $zC2b ) simpleGrading (1 1 1)
+    hex ( 8 12 13  9 24 28 29 25) ( $xC2b $yC2b $zC2b ) simpleGrading (1 1 1)
+    hex ( 9 13 14 10 25 29 30 26) ( $xC2b $yC1b $zC2b ) simpleGrading (1 1 1)
+    hex (10 14 15 11 26 30 31 27) ( $xC2b $yC2b $zC2b ) simpleGrading (1 1 1)
+    // Top blocks
+    hex (16 20 21 17 32 36 37 33) ( $xC2b $yC2b $zC1b ) simpleGrading (1 1 1)
+    hex (17 21 22 18 33 37 38 34) ( $xC2b $yC1b $zC1b ) simpleGrading (1 1 1)
+    hex (18 22 23 19 34 38 39 35) ( $xC2b $yC2b $zC1b ) simpleGrading (1 1 1)
+    hex (20 24 25 21 36 40 41 37) ( $xC1b $yC2b $zC1b ) simpleGrading (1 1 1)
+    // Fluid domain block missing
+    hex (22 26 27 23 38 42 43 39) ( $xC1b $yC2b $zC1b ) simpleGrading (1 1 1)
+    hex (24 28 29 25 40 44 45 41) ( $xC2b $yC2b $zC1b ) simpleGrading (1 1 1)
+    hex (25 29 30 26 41 45 46 42) ( $xC2b $yC1b $zC1b ) simpleGrading (1 1 1)
+    hex (26 30 31 27 42 46 47 43) ( $xC2b $yC2b $zC1b ) simpleGrading (1 1 1)
+    // Lithium block
+    hex (48 50 51 49 52 54 55 53) ( $xC1 $yC1 $zC2 ) simpleGrading (1 1 1)
+);
+
+edges
+(
+);
+
+boundary
+(
+    outsideSurface
+    {
+        type patch;
+        faces
+        (
+            // Bottom layer
+            (0 16 17 1)
+            (1 17 18 2)
+            (2 18 19 3)
+            (3 19 23 7)
+            (7 23 27 11)
+            (11 27 31 15)
+            (15 31 30 14)
+            (14 30 29 13)
+            (13 29 28 12)
+            (12 28 24 8)
+            (8 24 20 4)
+            (4 20 16 0)
+            // Top layer
+            (16 32 33 17)
+            (17 33 34 18)
+            (18 34 35 19)
+            (19 35 39 23)
+            (23 39 43 27)
+            (27 43 47 31)
+            (31 47 46 30)
+            (30 46 45 29)
+            (29 45 44 28)
+            (28 44 40 24)
+            (24 40 36 20)
+            (20 36 32 16)
+            // Bottom wall
+            (0 1 5 4)
+            (1 2 6 5)
+            (2 3 7 6)
+            (4 5 9 8)
+            (5 6 10 9)
+            (6 7 11 10)
+            (8 9 13 12)
+            (9 10 14 13)
+            (10 11 15 14)
+        );
+    }
+    lithiumInterface
+    {
+        type            regionCouple;
+        shadowRegion    region0;
+        shadowPatch     liquidToLithiumInterface;
+        zone            lithiumInterfaceZone;
+        attached        off;
+        master          off;
+        isWall          off;
+        bridgeOverlap   off;
+        faces
+        (
+            (48 52 53 49)
+            (49 53 55 51)
+            (51 55 54 50)
+            (50 54 52 48)
+            // bottom
+            (48 49 51 50)
+        );
+    }
+    steelInterface
+    {
+        type            regionCouple;
+        shadowRegion    region0;
+        shadowPatch     liquidToSteelInterface;
+        zone            steelInterfaceZone;
+        attached        off;
+        master          off;
+        isWall          off;
+        bridgeOverlap   off;
+        faces
+        (
+            // Sides
+            (21 22 38 37)
+            (22 26 42 38)
+            (26 25 41 42)
+            (25 21 37 41)
+            // Bottom
+            (21 25 26 22)
+        );
+    }
+    topLithium
+    {
+        type patch;
+        faces
+        (
+            (52 54 55 53)
+        );
+    }
+    topSurface
+    {
+        type patch;
+        faces
+        (
+            (32 36 37 33)
+            (33 37 38 34)
+            (34 38 39 35)
+            (36 40 41 37)
+            (38 42 43 39)
+            (40 44 45 41)
+            (41 45 46 42)
+            (42 46 47 43)
+        );
+    }
+);
+
+
+mergePatchPairs
+(
+);
+
+// ************************************************************************* //

@@ -1,0 +1,55 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:     5.0                                |
+|   \\  /    A nd           | Web:         http://www.foam-extend.org         |
+|    \\/     M anipulation  | For copyright notice see file Copyright         |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      transportProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// Transport properties for two-phase flow
+// phase 1 is the eutectic Pb-Bi lower electrode
+// phase 2 is the LiCl-KCl electrolyte
+
+// Eutectic Pb-Bi
+phase1
+{
+    transportModel  Newtonian;
+    nu              nu		 [ 0 2 -1 0 0 0 0 ] 1.29e-07;
+    rho             rho		 [ 1 -3 0 0 0 0 0 ] 10065;
+    conductivity    conductivity [-1 -3 3 0 0 2 0 ] 781000;
+}
+
+// LiCl-KCl electrolyte
+phase2
+{
+    transportModel  Newtonian;
+    nu              nu		 [ 0 2 -1 0 0 0 0 ] 1.38e-06;
+    rho             rho		 [ 1 -3 0 0 0 0 0 ] 1597.9;
+    conductivity    conductivity [-1 -3 3 0 0 2 0 ] 187.1;
+}
+
+// Interfacial tension between the two phases
+// Surface tension of Pb-Bi (0.43848 N/m)
+// Surface tension of LiCl-KCl (0.12976 N/m)
+sigma            sigma [ 1 0 -2 0 0 0 0 ] 0.2343; //surface tension
+					          // Should be 0.2343, broken
+
+// Magnetic permeability of Pb-Bi
+mu               mu [ 1 1 -2 0 0 -2 0 ] 1.25663706e-06;
+
+curvatureModel
+{
+    type interpolationSmoothedCSFAlpha;
+    nSmoothingIters 1;
+}
+
+// ************************************************************************* //

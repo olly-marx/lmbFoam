@@ -1,0 +1,3 @@
+faceSet liquidToSteelInterfaceZone new patchToFace liquidToSteelInterface
+faceSet liquidToLithiumInterfaceZone new patchToFace liquidToLithiumInterface
+quit

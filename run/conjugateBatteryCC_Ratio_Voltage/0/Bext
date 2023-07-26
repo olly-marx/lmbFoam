@@ -1,0 +1,38 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | foam-extend: Open Source CFD                    |
+|  \\    /   O peration     | Version:     5.0                                |
+|   \\  /    A nd           | Web:         http://www.foam-extend.org         |
+|    \\/     M anipulation  | For copyright notice see file Copyright         |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volVectorField;
+    object      Bext;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [1 0 -2 0 0 -1 0];
+
+internalField   uniform (0 0 -0.0005);
+				       // to 100 times that, so 2.5 to 6.5 Gauss
+
+boundaryField
+{
+    liquidToSteelInterface
+    {
+        type            zeroGradient;
+    }
+    liquidToLithiumInterface
+    {
+	type		zeroGradient;
+    }
+    topSurface
+    {
+        type            zeroGradient;
+    }
+}
+
+// ************************************************************************* //

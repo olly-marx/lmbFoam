@@ -15,24 +15,33 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
+h 0.03;
+dz 0.001;
+
 defaultFieldValues
 (
     volScalarFieldValue alpha1 0
     volScalarFieldValue conductivity 187.1
 );
 
-// Variable to store the height of the electrolyte layer
-h 0.03;
-
 regions
 (
+    boxToCell
+    {
+        box (-10 -10 -10) (10 10 $h+$dz);
+        fieldValues
+        (
+            volScalarFieldValue alpha1 1
+	    volScalarFieldValue conductivity 390593.55
+        );
+    }
     boxToCell
     {
         box (-10 -10 -10) (10 10 $h);
         fieldValues
         (
             volScalarFieldValue alpha1 1
-            volScalarFieldValue conductivity 781000
+	    volScalarFieldValue conductivity 781000
         );
     }
 );
