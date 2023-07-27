@@ -63,7 +63,7 @@ x3 = -(Nx-2*NB)*deltax/2
 x4 = (Nx-2*NB)*deltax/2
 y3 = -(Ny-2*NB)*deltay/2
 y4 = (Ny-2*NB)*deltay/2
-z3 = 34
+z3 = 34.75
 z4 = 50
 
 xC1 = Nx-2*NB

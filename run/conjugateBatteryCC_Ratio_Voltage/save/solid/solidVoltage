@@ -49,7 +49,7 @@ boundaryField
     topAttachmentPoint
     {
 	type            fixedValue;
-	value           uniform -0.007;
+	value           uniform $cellVoltage;
     }
     outerAttachmentPoint
     {

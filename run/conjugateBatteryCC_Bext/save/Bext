@@ -16,8 +16,7 @@ FoamFile
 
 dimensions      [1 0 -2 0 0 -1 0];
 
-internalField   uniform (0 0 -0.0005);
-				       // to 100 times that, so 2.5 to 6.5 Gauss
+internalField   uniform (0 0 -0.000);
 
 boundaryField
 {

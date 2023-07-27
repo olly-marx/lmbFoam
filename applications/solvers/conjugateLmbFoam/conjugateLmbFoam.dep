@@ -864,12 +864,8 @@ conjugateLmbFoam.dep: $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/readTimeContr
 conjugateLmbFoam.dep: $(WM_PROJECT_DIR)/src/foam/lnInclude/checkTotalVolume.H
 conjugateLmbFoam.dep: ../../../src/atomization/lnInclude/alphaCourantNo.H
 conjugateLmbFoam.dep: ../../../src/atomization/lnInclude/setAlphaDeltaT.H
-conjugateLmbFoam.dep: setVectorPotentialBCs.H
 conjugateLmbFoam.dep: detachPatches.H
 conjugateLmbFoam.dep: attachPatches.H
-conjugateLmbFoam.dep: solveBodyForce.H
-conjugateLmbFoam.dep: solveCurrentDensity.H
-conjugateLmbFoam.dep: solveMagneticField.H
 conjugateLmbFoam.dep: correctMeshMotion.H
 conjugateLmbFoam.dep: $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/volContinuity.H
 conjugateLmbFoam.dep: $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/meshCourantNo.H
