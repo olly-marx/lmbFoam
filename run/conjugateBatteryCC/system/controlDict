@@ -23,15 +23,26 @@ startTime       0;
 
 stopAt          endTime;
 
+<<<<<<< HEAD
 endTime         100;
+=======
+endTime         50;
+>>>>>>> tmp
 
 deltaT          0.001;
 
 writeControl    adjustableRunTime;
+<<<<<<< HEAD
 writeInterval   0.5;
 
 // writeControl timeStep;
 // writeInterval 5;
+=======
+writeInterval   0.50;
+
+// writeControl timeStep;
+// writeInterval 1;
+>>>>>>> tmp
 
 purgeWrite      0;
 

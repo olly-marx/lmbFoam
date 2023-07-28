@@ -30,14 +30,14 @@ else:
 meshPropertiesFile = "./system/meshProperties"
 
 # Set the number of cells in the x, y, and z directions
-N = 30
+N = 36
 
 if highRes: Nx = 2*N; Ny = 2*N; Nz = 100
-else: Nx = N; Ny = N; Nz = 50
+else: Nx = N; Ny = N; Nz = 65
 
 NB = Nx/8
 
-xyArea = 150*150
+xyArea = 144*144
 xyRatio = LxLyRatio
 
 x1 = -0.5 * (xyArea / xyRatio)**0.5
@@ -45,7 +45,7 @@ x2 = 0.5 * (xyArea / xyRatio)**0.5
 y1 = x1 * xyRatio
 y2 = x2 * xyRatio
 z1 = 0
-z2 = 50
+z2 = 52
 
 xLen1 = x2 - x1
 yLen1 = y2 - y1
@@ -63,8 +63,13 @@ x3 = -(Nx-2*NB)*deltax/2
 x4 = (Nx-2*NB)*deltax/2
 y3 = -(Ny-2*NB)*deltay/2
 y4 = (Ny-2*NB)*deltay/2
+<<<<<<< HEAD
 z3 = 34.75
 z4 = 50
+=======
+z3 = 36
+z4 = 52
+>>>>>>> tmp
 
 xC1 = Nx-2*NB
 xC2 = NB

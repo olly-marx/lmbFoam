@@ -15,19 +15,29 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-7
+5
 (
     outsideSurface
     {
         type            patch;
+<<<<<<< HEAD
         nFaces          9648;
         startFace       111016;
+=======
+        nFaces          14080;
+        startFace       177275;
+>>>>>>> tmp
     }
     lithiumInterface
     {
         type            regionCouple;
+<<<<<<< HEAD
         nFaces          1804;
         startFace       120664;
+=======
+        nFaces          2889;
+        startFace       191355;
+>>>>>>> tmp
         shadowRegion    region0;
         shadowPatch     liquidToLithiumInterface;
         zone            lithiumInterfaceZone;
@@ -39,8 +49,13 @@ FoamFile
     steelInterface
     {
         type            regionCouple;
+<<<<<<< HEAD
         nFaces          6900;
         startFace       122468;
+=======
+        nFaces          10656;
+        startFace       194244;
+>>>>>>> tmp
         shadowRegion    region0;
         shadowPatch     liquidToSteelInterface;
         zone            steelInterfaceZone;
@@ -52,12 +67,18 @@ FoamFile
     topLithium
     {
         type            patch;
+<<<<<<< HEAD
         nFaces          480;
         startFace       129368;
+=======
+        nFaces          729;
+        startFace       204900;
+>>>>>>> tmp
     }
     topSurface
     {
         type            patch;
+<<<<<<< HEAD
         nFaces          544;
         startFace       129848;
     }
@@ -72,6 +93,10 @@ FoamFile
         type            patch;
         nFaces          4;
         startFace       130396;
+=======
+        nFaces          640;
+        startFace       205629;
+>>>>>>> tmp
     }
 )
 
