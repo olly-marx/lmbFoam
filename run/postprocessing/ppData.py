@@ -17,7 +17,7 @@ foamFile = sys.argv[1]
 
 # get active source.
 thisfoam = OpenFOAMReader(registrationName=foamFile+'.foam', \
-        FileName='/home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/'+foamFile+'/'+foamFile+'.foam')
+        FileName='./'+foamFile+'.foam')
 # Properties modified on thisfoam
 thisfoam.MeshRegions = ['internalMesh']
 thisfoam.CellArrays = ['U', 'alpha1', 'bodyForce']
@@ -77,7 +77,7 @@ saveName = sys.argv[2]
 SetActiveSource(plotDataOverTime1)
 
 # save data
-SaveData('/home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/postprocessing/UvsTime.csv', proxy=plotDataOverTime1, ChooseArraysToWrite=1,
+SaveData('../postprocessing/UvsTime.csv', proxy=plotDataOverTime1, ChooseArraysToWrite=1,
     RowDataArrays=['Time', 'avg(U (Magnitude))', 'avg(bodyForce (Magnitude))'],
     Precision=8,
     FieldAssociation='Row Data',
@@ -87,7 +87,7 @@ SaveData('/home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/postprocessing/
 SetActiveSource(plotDataOverTime3)
 
 # save data
-SaveData('/home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/postprocessing/URMSElecvsTime.csv', proxy=plotDataOverTime2, ChooseArraysToWrite=1,
+SaveData('../postprocessing/URMSElecvsTime.csv', proxy=plotDataOverTime2, ChooseArraysToWrite=1,
     RowDataArrays=['Time','avg(magU2)'],
     Precision=8,
     FieldAssociation='Row Data',
@@ -97,7 +97,7 @@ SaveData('/home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/postprocessing/
 SetActiveSource(plotDataOverTime2)
 
 # save data
-SaveData('/home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/postprocessing/HvsTime.csv', proxy=plotDataOverTime3, ChooseArraysToWrite=1,
+SaveData('../postprocessing/HvsTime.csv', proxy=plotDataOverTime3, ChooseArraysToWrite=1,
     RowDataArrays=['Time','max(height_i)'],
     Precision=8,
     FieldAssociation='Row Data',
@@ -108,21 +108,21 @@ SaveData('/home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/postprocessing/
 # bodyForce_ave, and the fourth column being the u_rms_elec, and the fifth column being the height_i
 # get data from file ./UvsTime.csv ignoring the first row
 data1 = \
-np.genfromtxt('/home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/postprocessing/UvsTime.csv',\
+np.genfromtxt('../postprocessing/UvsTime.csv',\
         delimiter=',')
 # get data from file ./URMSElecvsTime.csv ignoring the first row
 data2 = \
-np.genfromtxt('/home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/postprocessing/URMSElecvsTime.csv',\
+np.genfromtxt('../postprocessing/URMSElecvsTime.csv',\
         delimiter=',')
 # get data from file ./HvsTime.csv ignoring the first row
 data3 = \
-np.genfromtxt('/home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/postprocessing/HvsTime.csv',\
+np.genfromtxt('../postprocessing/HvsTime.csv',\
         delimiter=',')
 
 # Now combine the data
 data = np.column_stack((data1[:,0], data1[:,1], data1[:,2], data2[:,1], data3[:,1]))
 
 # Now save the data
-np.savetxt('/home/ojm40/foam/ojm40-5.0/work/liquidMetalBattery/run/postprocessing/'\
+np.savetxt('../postprocessing/'\
         +saveName+'.csv', data, delimiter=',', header='Time, U_ave, bodyForce_ave, u_rms_elec, height_i')
 

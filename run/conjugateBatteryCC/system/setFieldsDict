@@ -15,8 +15,8 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-h 0.03;
-dz 0.001;
+h 0.0304;
+dz 0.0312;
 
 defaultFieldValues
 (
@@ -28,10 +28,10 @@ regions
 (
     boxToCell
     {
-        box (-10 -10 -10) (10 10 $h+$dz);
+        box (-10 -10 -10) (10 10 $dz);
         fieldValues
         (
-            volScalarFieldValue alpha1 1
+            volScalarFieldValue alpha1 0.75
 	    volScalarFieldValue conductivity 390593.55
         );
     }
