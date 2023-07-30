@@ -47,7 +47,7 @@ calculatorHE.Function = 'coordsZ'
 thresholdErel = Threshold(registrationName='ThresholdErel', Input=calculatorHE)
 thresholdErel.Scalars = ['POINTS', 'height']
 thresholdErel.LowerThreshold = 0.026
-thresholdErel.UpperThreshold = 0.034
+thresholdErel.UpperThreshold = 0.036
 
 # Calculate u rms in the electrolyte
 calculatorUrmsInE = Calculator(registrationName='CalculatoruRMSinE',\

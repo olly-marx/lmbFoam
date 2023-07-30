@@ -1,3 +1,0 @@
-faceSet lithiumInterfaceZone new patchToFace lithiumInterface
-faceSet steelInterfaceZone new patchToFace steelInterface
-quit

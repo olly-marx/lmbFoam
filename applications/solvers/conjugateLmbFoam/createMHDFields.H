@@ -68,7 +68,7 @@
 	    runTime.timeName(),
 	    mesh,
 	    IOobject::MUST_READ,
-	    IOobject::AUTO_WRITE
+	    IOobject::NO_WRITE
 	),
 	mesh
     );
@@ -136,7 +136,7 @@
 	    runTime.timeName(),
 	    mesh,
 	    IOobject::MUST_READ,
-	    IOobject::AUTO_WRITE
+	    IOobject::NO_WRITE
 	),
 	mesh
     );

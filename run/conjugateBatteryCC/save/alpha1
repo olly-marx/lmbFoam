@@ -31,7 +31,6 @@ boundaryField
     }
     topSurface
     {
-        type            inletOutlet;
-        inletValue      uniform 0;
+	type            zeroGradient;
     }
 }
