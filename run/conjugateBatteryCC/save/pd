@@ -30,10 +30,11 @@ boundaryField
     }
     topSurface
     {
-        type            totalPressure;
-        p0              uniform 0;
-        gamma           1;
-        value           uniform 0;
+        // type            totalPressure;
+        // p0              uniform 0;
+        // gamma           1;
+        // value           uniform 0;
+	type 	  zeroGradient;
     }
 }
 

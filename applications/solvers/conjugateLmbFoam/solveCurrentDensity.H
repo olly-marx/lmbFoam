@@ -63,7 +63,7 @@
 	    conductivity*
 	    (
 	    - fvc::grad(inducedVoltage)
-	    + (U ^ Bext)
+	    + (U ^ B)
 	    );
     j.correctBoundaryConditions();
 

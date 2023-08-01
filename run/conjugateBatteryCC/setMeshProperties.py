@@ -35,7 +35,7 @@ N = 36
 if highRes: Nx = 2*N; Ny = 2*N; Nz = 100
 else: Nx = N; Ny = N; Nz = 50
 
-NB = Nx/8
+NB = math.floor(N/8)
 
 xyArea = 144*144
 xyRatio = LxLyRatio
@@ -63,8 +63,8 @@ x3 = -(Nx-2*NB)*deltax/2
 x4 = (Nx-2*NB)*deltax/2
 y3 = -(Ny-2*NB)*deltay/2
 y4 = (Ny-2*NB)*deltay/2
-z3 = 36.0
-z4 = 52.0
+z3 = 35.0
+z4 = 50.0
 
 xC1 = Nx-2*NB
 xC2 = NB
@@ -95,6 +95,10 @@ zC1b = Nz
 zC2b = 4
 
 # Write the using sed commands
+# The first line is the LxLyRatio, which needs to have 2 decimal places
+os.system("sed -i 's/^LxLy .*/LxLy %.2f;/' %s" % (LxLyRatio, meshPropertiesFile))
+
+# Now the rest
 os.system("sed -i 's/^x1 .*/x1 %f;\/\/ \"$x1\"/' %s" % (x1, meshPropertiesFile)) 
 os.system("sed -i 's/^x2 .*/x2 %f;\/\/ \"$x2\"/' %s" % (x2, meshPropertiesFile))
 os.system("sed -i 's/^y1 .*/y1 %f;\/\/ \"$y1\"/' %s" % (y1, meshPropertiesFile))

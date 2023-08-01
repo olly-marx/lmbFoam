@@ -98,7 +98,7 @@ SetActiveSource(plotDataOverTime2)
 
 # save data
 SaveData('../postprocessing/HvsTime.csv', proxy=plotDataOverTime3, ChooseArraysToWrite=1,
-    RowDataArrays=['Time','max(height_i)'],
+    RowDataArrays=['Time','max(height_i)', 'avg(height_i)'],
     Precision=8,
     FieldAssociation='Row Data',
     AddTime=1)
@@ -120,9 +120,11 @@ np.genfromtxt('../postprocessing/HvsTime.csv',\
         delimiter=',')
 
 # Now combine the data
-data = np.column_stack((data1[:,0], data1[:,1], data1[:,2], data2[:,1], data3[:,1]))
+data = np.column_stack((data1[:,0], data1[:,1], data1[:,2], data2[:,1],\
+    data3[:,1], data3[:,2]))
 
 # Now save the data
 np.savetxt('../postprocessing/'\
-        +saveName+'.csv', data, delimiter=',', header='Time, U_ave, bodyForce_ave, u_rms_elec, height_i')
+        +saveName+'.csv', data, delimiter=',',\
+        header='Time,U_ave,bodyForce_ave,u_rms_elec,height_i_Max,height_i_Ave')
 

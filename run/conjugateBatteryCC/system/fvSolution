@@ -60,18 +60,18 @@ solvers
     {
         solver            CG;
         preconditioner    Cholesky;
-        minIter           0;
+        minIter           1;
         maxIter           1000;
-        tolerance         1e-4;
+        tolerance         1e-9;
         relTol            0.0;
     }
     inducedVoltage_solidInducedVoltage
     {
         solver            CG;
         preconditioner    Cholesky;
-        minIter           0;
+        minIter           1;
         maxIter           1000;
-        tolerance         1e-4;
+        tolerance         1e-9;
         relTol            0.0;
     }
     "(a|A0)"
@@ -80,7 +80,7 @@ solvers
         preconditioner    Cholesky;
         minIter           0;
         maxIter           1000;
-        tolerance         1e-4;
+        tolerance         1e-9;
         relTol            0.0;
     }
 }

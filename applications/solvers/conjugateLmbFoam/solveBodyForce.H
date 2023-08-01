@@ -84,14 +84,15 @@
     
     // Electric current field
     bodyForce = 
-	    (
-	     J0crossb
-	     + J0crossBext
-	     + J0crossB0
-	     + jcrossb
-	     + jcrossB0
-	     + jcrossBext
-	    )
+	    //(
+	    // J0crossb
+	    // + J0crossBext
+	    // + J0crossB0
+	    // + jcrossb
+	    // + jcrossB0
+	    // + jcrossBext
+	    //)
+	    (J^B)
 	    /(alpha1*rho1 + (1 - alpha1)*rho2);
     bodyForce.correctBoundaryConditions();
 }

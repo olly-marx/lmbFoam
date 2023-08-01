@@ -12,6 +12,17 @@ if [ "$out" = "-loud" ]; then
 	setF=$3
 	if [ "$setF" = "-setFields" ]; then
 		setFields
+	else
+		rm 0/alpha1
+		rm 0/alpha1.gz
+		# Get the value of LxLy (line 4 of meshProperties, format: 
+		# LxLy 0.1;)
+		LxLy=`sed -n '4p' system/meshProperties | awk '{print $2}'`
+		# Cut the ; off the end
+		LxLy=${LxLy%;}
+		# Copy the corresponding file
+		echo "Copying init/R$LxLy.gz to 0/alpha1.gz"
+		cp init/R$LxLy.gz 0/alpha1.gz
 	fi
 
 	#solid
@@ -70,6 +81,17 @@ elif [ "$out" = "-quiet" ]; then
 	setF=$3
 	if [ "$setF" = "-setFields" ]; then
 		runApplication setFields
+	else
+		rm 0/alpha1
+		rm 0/alpha1.gz
+		# Get the value of LxLy (line 4 of meshProperties, format: 
+		# LxLy 0.1;)
+		LxLy=`sed -n '4p' system/meshProperties | awk '{print $2}'`
+		# Cut the ; off the end
+		LxLy=${LxLy%;}
+		# Copy the corresponding file
+		echo "Copying init/R$LxLy.gz to 0/alpha1.gz"
+		cp init/R$LxLy.gz 0/alpha1.gz
 	fi
 
 	#solid

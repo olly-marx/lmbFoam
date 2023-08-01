@@ -17,6 +17,8 @@
         bodyForce
     );
 
+    Info<<"Body force divergence = "<<gSum(bodyForce.boundaryField())<<endl;
+
     UEqn.relax
     (
         mesh.solutionDict().equationRelaxationFactor

@@ -11,9 +11,9 @@ do
 	./Allrun -quiet -parallel
 
 	# Post process the simulation
-	pvpython ../postprocessing/uRMS.py conjugateBatteryCC_Bext Bext-$Bext-Bottom
+	pvpython ../postprocessing/ppData.py conjugateBatteryCC_Bext Bext-$Bext-Bottom
 
 	# clean the case
-	pyFoamClearCase.py .
-	rm -rf processor* log*
+	rm -rf processor* log* [0-9]*
+	cp -r save/ 0/
 done

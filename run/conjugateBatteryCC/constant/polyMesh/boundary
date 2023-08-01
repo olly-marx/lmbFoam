@@ -20,8 +20,8 @@ FoamFile
     liquidToSteelInterface
     {
         type            regionCouple;
-        nFaces          10325;
-        startFace       188280;
+        nFaces          8496;
+        startFace       153384;
         shadowRegion    solid;
         shadowPatch     steelInterface;
         zone            liquidToSteelInterfaceZone;
@@ -33,8 +33,8 @@ FoamFile
     liquidToLithiumInterface
     {
         type            regionCouple;
-        nFaces          2889;
-        startFace       198605;
+        nFaces          2464;
+        startFace       161880;
         shadowRegion    solid;
         shadowPatch     lithiumInterface;
         zone            liquidToLithiumInterfaceZone;
@@ -46,8 +46,8 @@ FoamFile
     topSurface
     {
         type            patch;
-        nFaces          496;
-        startFace       201494;
+        nFaces          512;
+        startFace       164344;
     }
 )
 
